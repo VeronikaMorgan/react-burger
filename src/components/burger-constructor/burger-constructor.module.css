@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.list {
+  max-height: calc(100vh - 580px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.checkout {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.icon {
+  background-size: 33px;
+}

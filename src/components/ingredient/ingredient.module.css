@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 208px;
+}
+
+.price {
+  display: flex;
+  gap: 8px;
+}
+
+.img {
+  width: 240px;
+  height: 120px;
+}
+
+/* .text {
+  min
+} */

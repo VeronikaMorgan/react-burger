@@ -1,0 +1,13 @@
+.heading {
+  text-align: left;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  max-height: calc(100vh - 336px);
+  overflow-y: auto;
+}
+
+.section {
+  min-height: 100%
+}
