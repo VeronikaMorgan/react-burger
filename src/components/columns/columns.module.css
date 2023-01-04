@@ -1,0 +1,6 @@
+.columns {
+  max-height: 100%;
+  display: grid;
+  grid-template-columns: 600px 600px;
+  gap: 40px;
+}
