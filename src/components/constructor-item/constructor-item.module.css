@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 563px;
+  gap: 8px;
+}
+
+.wrapper_draggable {
+  cursor: pointer;
+}
+

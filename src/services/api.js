@@ -9,3 +9,4 @@ const domain = "https://norma.nomoreparties.space/api/ingredients"
 //     console.log(err)
 //   }
 // }
+

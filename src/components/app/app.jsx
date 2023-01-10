@@ -1,31 +1,23 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import MainPage from '../main-page/main-page';
-// import { getIngredients } from '../../services/api';
+import { getIngredients } from '../../services/actions/ingredients';
 
 function App() {
-  const [ingredients, setIngredients] = useState([])
   const [isOpen, setIsOpen] = useState(false)
-  
-  useEffect(() => {
-    const getData = async() => {
-      try{
-        let res = await fetch("https://norma.nomoreparties.space/api/ingredients")
-        let data = await res.json();
-        setIngredients(data.data);
-      } catch(err) {
-        console.log(err)
-      }
-    }
-    getData()
-  },[])
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch(getIngredients())
+  },[])
+  
   return (
     <div className={styles.app}>
       <AppHeader />
-      <MainPage ingredients={ingredients}/>
+      <MainPage />
     </div>
   );
 }

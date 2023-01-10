@@ -4,7 +4,7 @@ import ingredientsStyles from './burger-ingredients.module.css'
 import Tabs from '../tabs/tabs';
 import IngredientsGrid from '../ingredients-grid/ingredients-grid';
 
-const BurgerIngredients = ({ingredients, updateConstructor, openModal}) => {
+const BurgerIngredients = ({ updateConstructor, openModal}) => {
 
   return (
     <section className={ingredientsStyles.section}>
@@ -12,11 +12,11 @@ const BurgerIngredients = ({ingredients, updateConstructor, openModal}) => {
       <Tabs />
       <div className={`${ingredientsStyles.wrapper} mt-10 pr-2 my-scroll`}>
         <h2 className={`${ingredientsStyles.heading} text text_type_main-medium`}>Булки</h2>
-        <IngredientsGrid type={"bun"} ingredients={ingredients} updateConstructor={updateConstructor} openModal={openModal}/>
+        <IngredientsGrid type={"bun"} updateConstructor={updateConstructor} openModal={openModal}/>
         <h2 className={`${ingredientsStyles.heading} text text_type_main-medium`}>Соусы</h2>
-        <IngredientsGrid type={"sauce"} ingredients={ingredients} updateConstructor={updateConstructor} openModal={openModal}/>
+        <IngredientsGrid type={"sauce"}  updateConstructor={updateConstructor} openModal={openModal}/>
         <h2 className={`${ingredientsStyles.heading} text text_type_main-medium`}>Начинки</h2>
-        <IngredientsGrid type={"main"} ingredients={ingredients} updateConstructor={updateConstructor} openModal={openModal}/>
+        <IngredientsGrid type={"main"} updateConstructor={updateConstructor} openModal={openModal}/>
       </div>
     </section>
   )

@@ -8,61 +8,46 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
 
-const MainPage = ({ingredients}) => {
-  const [constructorState, setConstructorState] = useState([]);
-  const [isOpened, setOpened] = useState(false)
-  const [ingredientData, setIngredientData] = useState(null)
-  
-  const openIngredientDetails = (data) => {
-    setOpened(true);
-    setIngredientData(data)
-  }
+const MainPage = () => {
+  // const [isOpened, setOpened] = useState(false)
 
-  const openOrderDetails = () => {
-    setOpened(true);
-  }
-
-  const closeModal = () => {
-    setOpened(false)
-    setIngredientData(null)
-  }
-  
-  // const hasBun = (data) => {
-  //   const index = data.findIndex((el) => {return el.type === 'bun'})
-  //   return index;
+  // const openIngredientDetails = (data) => {
+  //   setOpened(true);
+  //   setIngredientData(data)
   // }
-  
-  const updateConstructorData = useCallback((ingredientData) => {
-    // const index = hasBun(constructorState);
-    // const newState = (ingredientData.type === 'bun' && index >= 0)
-    // ? constructorState.slice().splice(index, 1, ingredientData)
-    // : [...constructorState, ingredientData]
-    setConstructorState([...constructorState, ingredientData]);
-  })
+
+  // const openOrderDetails = () => {
+  //   setOpened(true);
+  // }
+
+  // const closeModal = () => {
+  //   setOpened(false)
+  //   setIngredientData(null)
+  // }
 
   return (
     <main className={mainStyles.main}>
-      <Columns>
-        <BurgerIngredients ingredients={ingredients} updateConstructor={updateConstructorData} openModal={openIngredientDetails}/>
-        <BurgerConstructor data={constructorState} openModal={openOrderDetails}/>
-      </Columns>
-      {!!isOpened && !!ingredientData && 
+      <DndProvider backend={HTML5Backend}>
+        <Columns>
+          <BurgerIngredients  />
+          <BurgerConstructor />
+        </Columns>
+      </DndProvider>
+      {/* {!!isOpened && !!ingredientData &&
         <Modal title='Детали ингредиента' closeModal={closeModal}>
-          <IngredientDetails data={ingredientData}/>
+          <IngredientDetails />
         </Modal>
       }
       {!!isOpened && ingredientData === null &&
         <Modal closeModal={closeModal}>
-          <OrderDetails/>
+          <OrderDetails />
         </Modal>
-      }
+      } */}
     </main>
   )
-}
-
-MainPage.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default MainPage;
