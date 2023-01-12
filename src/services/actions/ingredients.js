@@ -11,6 +11,9 @@ export function getIngredients () {
     })
     try {
       let res = await fetch(api)
+      if(!res.ok) {
+        return Promise.reject(`Ошибка ${res.status}`);
+      }
       let data = await res.json()
       dispatch({
         type: GET_INGREDIENTS_SUCCESS,

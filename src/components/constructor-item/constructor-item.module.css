@@ -3,10 +3,19 @@
   align-items: center;
   justify-content: flex-end;
   width: 563px;
-  gap: 8px;
+  gap: 6px;
 }
 
 .wrapper_draggable {
   cursor: pointer;
 }
 
+.dragging {
+  box-sizing: border-box;
+  width: 536px;
+  height: 82px;
+  border-radius: 40px;
+  background-color: transparent;
+  border: rgb(60, 60, 255) 0.2em solid;
+  box-shadow: inset 0 0 1.3em 0 #5444f3;
+}

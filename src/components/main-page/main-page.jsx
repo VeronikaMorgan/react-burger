@@ -1,6 +1,10 @@
 import React from 'react';
-import { useState, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import { useSelector, useDispatch } from 'react-redux';
+import { CLEAR_INGREDIENT_DETAILS } from '../../services/actions/ingredient-details';
+import { CLEAR_ORDER_DETAILS } from '../../services/actions/order';
+
 import Columns from '../columns/columns';
 import mainStyles from './main-page.module.css'
 import BurgerConstructor from '../burger-constructor/burger-constructor';
@@ -8,44 +12,36 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { DndProvider } from 'react-dnd';
 
 const MainPage = () => {
-  // const [isOpened, setOpened] = useState(false)
+  const details = useSelector(store => store.ingredientData.currentIngredient);
+  const orderData = useSelector(store => store.orderData.order)
 
-  // const openIngredientDetails = (data) => {
-  //   setOpened(true);
-  //   setIngredientData(data)
-  // }
-
-  // const openOrderDetails = () => {
-  //   setOpened(true);
-  // }
-
-  // const closeModal = () => {
-  //   setOpened(false)
-  //   setIngredientData(null)
-  // }
+  const dispatch = useDispatch()
+  const closeModal = () => {
+    details
+      ? dispatch({ type: CLEAR_INGREDIENT_DETAILS })
+      : dispatch({ type: CLEAR_ORDER_DETAILS })
+  }
 
   return (
     <main className={mainStyles.main}>
       <DndProvider backend={HTML5Backend}>
         <Columns>
-          <BurgerIngredients  />
+          <BurgerIngredients />
           <BurgerConstructor />
         </Columns>
       </DndProvider>
-      {/* {!!isOpened && !!ingredientData &&
+      {details &&
         <Modal title='Детали ингредиента' closeModal={closeModal}>
-          <IngredientDetails />
+          <IngredientDetails data={details} />
         </Modal>
       }
-      {!!isOpened && ingredientData === null &&
+      {orderData &&
         <Modal closeModal={closeModal}>
-          <OrderDetails />
+          <OrderDetails orderNumber={orderData.number} />
         </Modal>
-      } */}
+      }
     </main>
   )
 }

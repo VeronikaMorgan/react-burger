@@ -34,7 +34,7 @@ const AppHeader = () => {
         </li>
         <li className={headerStyles.profile}>
           <a href="#" className={headerStyles.menu__link}>
-            <ProfileIcon type="primary"/>
+            <ProfileIcon type="primary" />
             <p className="text text_type_main-default">Личный кабинет</p>
           </a>
         </li>

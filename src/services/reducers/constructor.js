@@ -1,5 +1,4 @@
 import { ADD_CONSTRUCTOR_ITEM, ADD_CONSTRUCTOR_BUN, DELETE_ITEM, UPDATE_ON_ITEM_MOVE } from "../actions/constructor";
-import update from 'immutability-helper';
 
 const constructorState = {
   constructorItems: [],
