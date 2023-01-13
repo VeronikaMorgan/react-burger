@@ -35,3 +35,11 @@
 .icon {
   background-size: 33px;
 }
+
+.button {
+  display: flex;
+  width: 215px;
+  height: 64px;
+  justify-content: center;
+  align-items: center;
+}

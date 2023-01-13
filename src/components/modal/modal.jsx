@@ -9,17 +9,14 @@ const modalRoot = document.getElementById("react-modals");
 
 const Modal = ({ children, title, closeModal }) => {
   useEffect(() => {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+    const closeByEsc = (evt) => {
+      if (evt.key === 'Escape') {
         closeModal()
       }
-    });
+    }
+    document.addEventListener('keydown', closeByEsc);
     return () => {
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          closeModal()
-        }
-      });
+      document.addEventListener('keydown', closeByEsc);
     }
   }, [])
 

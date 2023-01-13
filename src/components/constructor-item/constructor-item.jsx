@@ -2,9 +2,10 @@ import React from "react";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import PropTypes from 'prop-types';
+import { ingredientType } from "../../utils/types";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from "react-redux";
-import { DELETE_ITEM } from "../../services/actions/constructor";
+import { deleteItem } from "../../services/actions/constructor";
 import itemStyles from './constructor-item.module.css'
 
 const ConstructorItem = ({ data, id, index, moveItemHandler }) => {
@@ -57,10 +58,7 @@ const ConstructorItem = ({ data, id, index, moveItemHandler }) => {
   drag(drop(ref))
 
   const deleteItem = () => {
-    dispatch({
-      type: DELETE_ITEM,
-      payload: data
-    })
+    dispatch(deleteItem(data))
   }
 
   return (
@@ -82,7 +80,7 @@ const ConstructorItem = ({ data, id, index, moveItemHandler }) => {
 }
 
 ConstructorItem.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.shape(ingredientType).isRequired,
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   moveItemHandler: PropTypes.func.isRequired

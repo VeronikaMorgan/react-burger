@@ -16,7 +16,7 @@ const IngredientsGrid = ({ type }) => {
 }
 
 IngredientsGrid.propTypes = {
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
 }
 
 export default IngredientsGrid

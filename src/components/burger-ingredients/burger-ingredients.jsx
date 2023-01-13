@@ -26,8 +26,7 @@ const BurgerIngredients = () => {
     root: rootRef.current
   })
 
-  const handleClick = (e, ref) => {
-    e.preventDefault()
+  const handleClick = (ref) => {
     ref.current.scrollIntoView()
   }
 
@@ -35,13 +34,13 @@ const BurgerIngredients = () => {
     <section className={ingredientsStyles.section}>
       <h1 className={`${ingredientsStyles.heading} text text_type_main-large mb-5`}>Соберите бургер</h1>
       <div className={ingredientsStyles.tabs}>
-        <Tab value="one" active={bunIsInView} onClick={(e) => handleClick(e, bunRef)}>
+        <Tab value="one" active={bunIsInView} onClick={() => handleClick(bunRef)}>
           Булки
         </Tab>
-        <Tab value="two" active={sauceIsInView && !bunIsInView && !mainIsInView} onClick={(e) => handleClick(e, sauceRef)}>
+        <Tab value="two" active={sauceIsInView && !bunIsInView && !mainIsInView} onClick={() => handleClick(sauceRef)}>
           Соусы
         </Tab>
-        <Tab value="three" active={mainIsInView || (!bunIsInView && !sauceIsInView)} onClick={(e) => handleClick(e, mainRef)}>
+        <Tab value="three" active={mainIsInView || (!bunIsInView && !sauceIsInView)} onClick={() => handleClick(mainRef)}>
           Начинки
         </Tab>
       </div>

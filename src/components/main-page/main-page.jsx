@@ -2,8 +2,8 @@ import React from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
-import { CLEAR_INGREDIENT_DETAILS } from '../../services/actions/ingredient-details';
-import { CLEAR_ORDER_DETAILS } from '../../services/actions/order';
+import { clearIngredientDetails } from '../../services/actions/ingredient-details';
+import { clearOrderDetails } from '../../services/actions/order';
 
 import Columns from '../columns/columns';
 import mainStyles from './main-page.module.css'
@@ -20,8 +20,8 @@ const MainPage = () => {
   const dispatch = useDispatch()
   const closeModal = () => {
     details
-      ? dispatch({ type: CLEAR_INGREDIENT_DETAILS })
-      : dispatch({ type: CLEAR_ORDER_DETAILS })
+      ? dispatch(clearIngredientDetails())
+      : dispatch(clearOrderDetails())
   }
 
   return (

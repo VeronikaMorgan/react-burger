@@ -1,17 +1,17 @@
 import React from "react";
 import { useMemo } from "react";
 import PropTypes from 'prop-types';
+import { ingredientType } from "../../utils/types";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientStyles from './ingredient.module.css'
 import { useDrag } from "react-dnd";
 import { useSelector, useDispatch } from "react-redux";
-import { SET_INGREDIENT_DETAILS } from "../../services/actions/ingredient-details";
+import { setIngredientDetails} from "../../services/actions/ingredient-details";
 // import { randomUUID } from "../../services/helpers/uuid-creator";
 
 const Ingredient = ({ data }) => {
   const constructorData = useSelector(store => store.constructorData.constructorItems)
   const dispatch = useDispatch()
-
   const counter = useMemo(() => {
     return data.type === 'bun'
       ? constructorData.filter(item => item._id === data._id).length * 2
@@ -28,10 +28,7 @@ const Ingredient = ({ data }) => {
 
   const openIngredientModal = (e) => {
     e.preventDefault()
-    dispatch({
-      type: SET_INGREDIENT_DETAILS,
-      payload: data
-    })
+    dispatch(setIngredientDetails(data))
   }
 
   return (
@@ -48,7 +45,7 @@ const Ingredient = ({ data }) => {
 }
 
 Ingredient.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.shape(ingredientType).isRequired
 }
 
 export default Ingredient;

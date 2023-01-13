@@ -1,4 +1,4 @@
-import { ADD_CONSTRUCTOR_ITEM, ADD_CONSTRUCTOR_BUN, DELETE_ITEM, UPDATE_ON_ITEM_MOVE } from "../actions/constructor";
+import { ADD_CONSTRUCTOR_ITEM, ADD_CONSTRUCTOR_BUN, DELETE_ITEM, UPDATE_ON_ITEM_MOVE, CLEAR_CONSTRUCTOR } from "../actions/constructor";
 
 const constructorState = {
   constructorItems: [],
@@ -37,6 +37,13 @@ export const constructorReducer = (state = constructorState, action) => {
       return {
         ...state,
         constructorItems: action.payload
+      }
+    }
+    case CLEAR_CONSTRUCTOR: {
+      return {
+        ...state,
+        constructorItems: [],
+        hasBun: false
       }
     }
     default: {

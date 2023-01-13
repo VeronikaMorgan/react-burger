@@ -5,15 +5,18 @@ import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 
 import { CurrencyIcon, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ADD_CONSTRUCTOR_ITEM, ADD_CONSTRUCTOR_BUN, UPDATE_ON_ITEM_MOVE } from '../../services/actions/constructor';
+import { addItem, addBun, updateConstructor} from '../../services/actions/constructor';
 import { createOrder } from '../../services/actions/order';
 
 import ConstructorItem from '../constructor-item/constructor-item';
+import Loader from '../loader/loader';
 import constructorStyles from './burger-constructor.module.css';
 import itemStyles from '../constructor-item/constructor-item.module.css';
 
+
 const BurgerConstructor = () => {
-  const data = useSelector(state => state.constructorData.constructorItems)
+  const data = useSelector(store => store.constructorData.constructorItems);
+  const isLoading = useSelector(store => store.orderData.createOrderRequest);
   const dispatch = useDispatch()
 
   const openOrderModal = (e) => {
@@ -26,14 +29,8 @@ const BurgerConstructor = () => {
     accept: 'ingredient',
     drop(newItem) {
       newItem.type === 'bun'
-        ? dispatch({
-          type: ADD_CONSTRUCTOR_BUN,
-          payload: newItem
-        })
-        : dispatch({
-          type: ADD_CONSTRUCTOR_ITEM,
-          payload: newItem
-        })
+        ? dispatch(addBun(newItem))
+        : dispatch(addItem(newItem))
     },
     collect: monitor => ({
       isOver: monitor.isOver()
@@ -48,11 +45,7 @@ const BurgerConstructor = () => {
         [hoverIndex, 0, dragCard]
       ]
     })
-    console.log(newData)
-    dispatch({
-      type: UPDATE_ON_ITEM_MOVE,
-      payload: newData
-    })
+    dispatch(updateConstructor(newData))
   }, [data])
 
   const getPrice = useMemo(() => {
@@ -94,7 +87,11 @@ const BurgerConstructor = () => {
         <div className={`${constructorStyles.checkout} mt-6`}>
           <p className='text text_type_digits-medium mr-2'>{getPrice}</p>
           <CurrencyIcon type='primary' />
-          <Button htmlType="button" type="primary" size="large" extraClass="ml-10 mr-4" onClick={(e) => openOrderModal(e)}>Оформить заказ</Button>
+          <Button htmlType="button" type="primary" size="large" extraClass={`${constructorStyles.button} ml-10 mr-4`} onClick={(e) => openOrderModal(e)}>
+            {isLoading 
+              ? <Loader />
+              : 'Оформить заказ'}
+          </Button>
         </div>
       }
     </section>
