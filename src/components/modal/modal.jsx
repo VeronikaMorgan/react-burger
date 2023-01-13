@@ -16,7 +16,7 @@ const Modal = ({ children, title, closeModal }) => {
     }
     document.addEventListener('keydown', closeByEsc);
     return () => {
-      document.addEventListener('keydown', closeByEsc);
+      document.removeEventListener('keydown', closeByEsc);
     }
   }, [])
 
