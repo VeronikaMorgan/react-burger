@@ -8,6 +8,10 @@
   overflow-y: auto;
 }
 
+.tabs {
+  display: flex;
+}
+
 .section {
   min-height: 100%
 }

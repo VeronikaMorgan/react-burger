@@ -1,26 +1,36 @@
+import { request } from "../../utils/api";
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
 
-const api = 'https://norma.nomoreparties.space/api/ingredients'
+const getIngredientsRequest = () => {
+  return {
+    type: GET_INGREDIENTS_REQUEST
+  }
+}
+
+const getIngredientsFailed = (err) => {
+  return {
+    type: GET_INGREDIENTS_FAILED,
+    payload: err
+  }
+}
+
+const getIngredientsSuccess = (data) => {
+  return {
+    type: GET_INGREDIENTS_SUCCESS,
+    payload: data
+  }
+}
 
 export function getIngredients () {
   return async (dispatch) => {
-    dispatch({
-      type: GET_INGREDIENTS_REQUEST
-    })
+    dispatch(getIngredientsRequest())
     try {
-      let res = await fetch(api)
-      let data = await res.json()
-      dispatch({
-        type: GET_INGREDIENTS_SUCCESS,
-        payload: data.data
-      })
+      const data = await request('ingredients')
+      dispatch(getIngredientsSuccess(data.data))
     } catch(err) {
-      dispatch({
-        type: GET_INGREDIENTS_FAILED,
-        payload: err
-      })
+      dispatch(getIngredientsFailed(err))
     }
   }
 }

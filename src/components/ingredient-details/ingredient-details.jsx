@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { ingredientType } from "../../utils/types";
 import detailsStyles from './ingredient-details.module.css';
 
-const IngredientDetails = ({data}) => {
- 
+const IngredientDetails = ({ data }) => {
+
   return (
     <div className={detailsStyles.wrapper}>
       <img src={data.image_large} className='pr-5 pl-5' alt={data.name} />
@@ -31,7 +32,7 @@ const IngredientDetails = ({data}) => {
 }
 
 IngredientDetails.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape(ingredientType).isRequired
 }
 
 export default IngredientDetails

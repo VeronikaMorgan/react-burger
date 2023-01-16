@@ -1,6 +1,8 @@
-import { GET_INGREDIENTS_REQUEST,
-         GET_INGREDIENTS_SUCCESS,
-         GET_INGREDIENTS_FAILED } from "../actions/ingredients";
+import {
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
+  GET_INGREDIENTS_FAILED
+} from "../actions/ingredients";
 
 const initialState = {
   getIngredientsFailed: false,
@@ -9,7 +11,7 @@ const initialState = {
   errorMessage: ''
 }
 export const ingredientsReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
         ...state,

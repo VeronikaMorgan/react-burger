@@ -2,30 +2,35 @@ import React from 'react';
 import { useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { ADD_CONSTRUCTOR_ITEM, ADD_CONSTRUCTOR_BUN, SET_PREV_ITEM, UPDATE_ON_ITEM_MOVE } from '../../services/actions/constructor';
-import PropTypes from 'prop-types';
-import ConstructorItem from '../constructor-item/constructor-item';
-import constructorStyles from './burger-constructor.module.css';
-import itemStyles from '../constructor-item/constructor-item.module.css'
-import { CurrencyIcon, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import update from 'immutability-helper';
 
-const BurgerConstructor = ({ openModal }) => {
-  const data = useSelector(state => state.constructorData.constructorItems)
+import { CurrencyIcon, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { addItem, addBun, updateConstructor} from '../../services/actions/constructor';
+import { createOrder } from '../../services/actions/order';
+
+import ConstructorItem from '../constructor-item/constructor-item';
+import Loader from '../loader/loader';
+import constructorStyles from './burger-constructor.module.css';
+import itemStyles from '../constructor-item/constructor-item.module.css';
+
+
+const BurgerConstructor = () => {
+  const data = useSelector(store => store.constructorData.constructorItems);
+  const isLoading = useSelector(store => store.orderData.createOrderRequest);
   const dispatch = useDispatch()
+
+  const openOrderModal = (e) => {
+    e.preventDefault()
+    const dataIds = data.map(item => [item._id])
+    dispatch(createOrder(dataIds))
+  }
 
   const [{ isOver }, dropRef] = useDrop({
     accept: 'ingredient',
     drop(newItem) {
       newItem.type === 'bun'
-        ? dispatch({
-          type: ADD_CONSTRUCTOR_BUN,
-          payload: newItem
-        })
-        : dispatch({
-          type: ADD_CONSTRUCTOR_ITEM,
-          payload: newItem
-        })
+        ? dispatch(addBun(newItem))
+        : dispatch(addItem(newItem))
     },
     collect: monitor => ({
       isOver: monitor.isOver()
@@ -34,17 +39,13 @@ const BurgerConstructor = ({ openModal }) => {
 
   const moveItemHandler = useCallback((dragIndex, hoverIndex) => {
     const dragCard = data[dragIndex]
-    const newData =  update(data, {
+    const newData = update(data, {
       $splice: [
         [dragIndex, 1],
         [hoverIndex, 0, dragCard]
       ]
     })
-    console.log(newData)
-    dispatch({
-      type: UPDATE_ON_ITEM_MOVE,
-      payload: newData
-    })
+    dispatch(updateConstructor(newData))
   }, [data])
 
   const getPrice = useMemo(() => {
@@ -52,7 +53,7 @@ const BurgerConstructor = ({ openModal }) => {
   }, [data])
 
   return (
-    <section className={`${constructorStyles.wrapper} ${isOver && constructorStyles.wrapper_isOver} mt-25 pl-4`} ref={dropRef}>
+    <section className={`${constructorStyles.wrapper} ${isOver && constructorStyles.wrapper_isOver} mt-20 pl-4`} ref={dropRef}>
       {data.map(item => {
         return item.type === 'bun' &&
           <div className={itemStyles.wrapper} key={item._id}>
@@ -66,7 +67,7 @@ const BurgerConstructor = ({ openModal }) => {
       })}
       <ul className={`${constructorStyles.list} list-default my-scroll pr-2`} >
         {data.map((item, i) => (item.type !== 'bun' &&
-          <li key={`${item._id}${i}`}>
+          <li key={`${item.uuid}`}>
             <ConstructorItem data={item} id={item._id} index={i} moveItemHandler={moveItemHandler} />
           </li>
         ))}
@@ -86,15 +87,15 @@ const BurgerConstructor = ({ openModal }) => {
         <div className={`${constructorStyles.checkout} mt-6`}>
           <p className='text text_type_digits-medium mr-2'>{getPrice}</p>
           <CurrencyIcon type='primary' />
-          <Button htmlType="button" type="primary" size="large" extraClass="ml-10 mr-4" onClick={openModal}>Оформить заказ</Button>
+          <Button htmlType="button" type="primary" size="large" extraClass={`${constructorStyles.button} ml-10 mr-4`} onClick={(e) => openOrderModal(e)}>
+            {isLoading 
+              ? <Loader />
+              : 'Оформить заказ'}
+          </Button>
         </div>
       }
     </section>
   )
-}
-
-BurgerConstructor.propTypes = {
-  openModal: PropTypes.func,
 }
 
 export default BurgerConstructor;
