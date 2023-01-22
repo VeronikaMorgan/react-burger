@@ -11,6 +11,7 @@ import { setIngredient } from "../../services/reducers/ingredient-details";
 
 const Ingredient = ({ data }) => {
   const constructorData = useSelector(store => store.constructors.constructorItems)
+  console.log(constructorData)
   const dispatch = useDispatch()
   const counter = useMemo(() => {
     return data.type === 'bun'

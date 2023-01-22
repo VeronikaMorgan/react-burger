@@ -18,13 +18,15 @@ export const constructorSlice = createSlice({
       if(state.hasBun) {
         state.constructorItems = state.constructorItems.map(item => item.type === 'bun' ? action.payload : item)
        } else {
-        state.constructorItems = state.constructorItems.push(action.payload)
+        state.constructorItems.push(action.payload)
         state.hasBun = true
        }
     },
-    // deleteItem: (state, action) => {
-    //   action.payload.type !== 'bun' && state.constructorItems.filter(item => item.uuid !== action.payload.uuid)
-    // },
+    deleteItem: (state, action) => {
+      if(action.payload.type !== 'bun') {
+        state.constructorItems = state.constructorItems.filter(item => item.uuid !== action.payload.uuid)
+      }
+    },
     updateConstructor: (state, action) => {state.constructorItems = action.payload},
     clearConstructor: state => {
       state.constructorItems = []
