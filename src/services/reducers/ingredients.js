@@ -1,3 +1,5 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { baseRequest } from '../../utils/api';
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
@@ -10,32 +12,32 @@ const initialState = {
   ingredients: [],
   errorMessage: ''
 }
-export const ingredientsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_INGREDIENTS_REQUEST: {
-      return {
-        ...state,
-        getIngredientsRequest: true
-      }
-    }
-    case GET_INGREDIENTS_SUCCESS: {
-      return {
-        ...state,
-        getIngredientsRequest: false,
-        getIngredientsFailed: false,
-        ingredients: action.payload
-      }
-    }
-    case GET_INGREDIENTS_FAILED: {
-      return {
-        ...state,
-        getIngredientsFailed: true,
-        getIngredientsRequest: false
-      }
-    }
-    default: {
-      return state
-    }
-  }
-}
 
+export const getIngredients = createAsyncThunk('ingredients/get', async (_, thunkAPI) => {
+  try {
+    const data = await baseRequest('ingredients');
+    return data.data;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(`someting went wrong: ${err}`)
+  }
+})
+export const ingredientsSlice = createSlice({
+  name: 'ingredients',
+  initialState: initialState,
+  extraReducers:(builder) => {
+    builder.addCase(getIngredients.pending, state => ({...state, getIngredientsRequest: true}))
+    builder.addCase(getIngredients.fulfilled,  (state, action) => ({
+      ...state,
+      getIngredientsRequest: false,
+      getIngredientsFailed: false,
+      ingredients: action.payload
+    }))
+    builder.addCase(getIngredients.rejected, state => ({
+      ...state,
+      getIngredientsFailed: true,
+      getIngredientsRequest: false
+    }))
+  }
+})
+
+export default ingredientsSlice.reducer

@@ -1,25 +1,22 @@
 import { SET_INGREDIENT_DETAILS, CLEAR_INGREDIENT_DETAILS } from "../actions/ingredient-details";
+import { createSlice } from "@reduxjs/toolkit";
 
 const ingredientState = {
   currentIngredient: null
 }
 
-export const ingredientReducer = (state = ingredientState, action) => {
-  switch (action.type) {
-    case SET_INGREDIENT_DETAILS: {
-      return {
-        ...state,
-        currentIngredient: action.payload
-      }
-    }
-    case CLEAR_INGREDIENT_DETAILS: {
-      return {
-        ...state,
-        currentIngredient: null
-      }
-    }
-    default: return {
-      state
-    }
+export const ingredientSlice = createSlice({
+  name: 'ingredient',
+  initialState: ingredientState,
+  reducers: {
+    setIngredient: (state, action) => {state.currentIngredient = action.payload},
+    clearIngredient: state => {state.currentIngredient = null}
   }
-}
+})
+
+export const {
+  setIngredient,
+  clearIngredient,
+} = ingredientSlice.actions
+
+export default ingredientSlice.reducer

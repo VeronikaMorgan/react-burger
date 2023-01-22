@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { ingredientType } from "../../utils/types";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from "react-redux";
-import { deleteItem } from "../../services/actions/constructor";
+import { deleteItem } from "../../services/reducers/constructor";
 import itemStyles from './constructor-item.module.css'
 
 const ConstructorItem = ({ data, id, index, moveItemHandler }) => {

@@ -2,8 +2,9 @@ import React from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearIngredientDetails } from '../../services/actions/ingredient-details';
-import { clearOrderDetails } from '../../services/actions/order';
+import { clearIngredient } from '../../services/reducers/ingredient-details';
+import { clearOrder } from '../../services/reducers/order';
+import { clearConstructor } from '../../services/reducers/constructor';
 
 import Columns from '../columns/columns';
 import mainStyles from './main-page.module.css'
@@ -14,14 +15,15 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 
 const MainPage = () => {
-  const details = useSelector(store => store.ingredientData.currentIngredient);
-  const orderData = useSelector(store => store.orderData.order)
+  const details = useSelector(store => store.ingredient.currentIngredient);
+  const orderData = useSelector(store => store.order.order)
 
   const dispatch = useDispatch()
   const closeModal = () => {
     details
-      ? dispatch(clearIngredientDetails())
-      : dispatch(clearOrderDetails())
+      ? dispatch(clearIngredient())
+      : dispatch(clearOrder())
+        dispatch(clearConstructor())
   }
 
   return (

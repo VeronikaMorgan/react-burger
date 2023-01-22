@@ -6,11 +6,11 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import ingredientStyles from './ingredient.module.css'
 import { useDrag } from "react-dnd";
 import { useSelector, useDispatch } from "react-redux";
-import { setIngredientDetails} from "../../services/actions/ingredient-details";
+import { setIngredient } from "../../services/reducers/ingredient-details";
 // import { randomUUID } from "../../services/helpers/uuid-creator";
 
 const Ingredient = ({ data }) => {
-  const constructorData = useSelector(store => store.constructorData.constructorItems)
+  const constructorData = useSelector(store => store.constructors.constructorItems)
   const dispatch = useDispatch()
   const counter = useMemo(() => {
     return data.type === 'bun'
@@ -28,7 +28,7 @@ const Ingredient = ({ data }) => {
 
   const openIngredientModal = (e) => {
     e.preventDefault()
-    dispatch(setIngredientDetails(data))
+    dispatch(setIngredient(data))
   }
 
   return (

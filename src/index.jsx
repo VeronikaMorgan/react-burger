@@ -1,14 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import { applyMiddleware } from 'redux';
-import { rootReducer } from './services/reducers';
-import thunk from 'redux-thunk';
 import './index.css';
 import App from './components/app/app';
 import reportWebVitals from './reportWebVitals';
-const store = createStore(rootReducer, applyMiddleware(thunk))
+import ingredientsReducer from './services/reducers/ingredients';
+import orderReducer from './services/reducers/order';
+import ingredientReducer from './services/reducers/ingredient-details';
+import constructorReducer from './services/reducers/constructor';
+
+const store = configureStore({
+  reducer: {
+    ingredients: ingredientsReducer,
+    ingredient: ingredientReducer,
+    order: orderReducer,
+    constructors: constructorReducer
+  }
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

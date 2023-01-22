@@ -4,7 +4,6 @@ import { useInView } from 'react-intersection-observer';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsGrid from '../ingredients-grid/ingredients-grid';
-
 import ingredientsStyles from './burger-ingredients.module.css'
 
 const BurgerIngredients = () => {
