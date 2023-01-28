@@ -5,8 +5,8 @@ import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 
 import { CurrencyIcon, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { addBun, addItem, updateConstructor } from '../../services/reducers/constructor';
-import { getOrder } from '../../services/reducers/order';
+import { addBun, addItem, updateConstructor } from '../../services/slices/constructor-slice';
+import { getOrder } from '../../services/slices/order-slice';
 
 import ConstructorItem from '../constructor-item/constructor-item';
 import Loader from '../loader/loader';
@@ -15,7 +15,7 @@ import itemStyles from '../constructor-item/constructor-item.module.css';
 
 
 const BurgerConstructor = () => {
-  const data = useSelector(store => store.constructors.constructorItems);
+  const data = useSelector(store => store.burgerConstructor.constructorItems);
   const isLoading = useSelector(store => store.order.createOrderRequest);
   const dispatch = useDispatch()
 

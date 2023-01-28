@@ -1,0 +1,29 @@
+.wrapper {
+  padding-top: 120px;
+  padding-left: calc((100vw - 860px) / 2);
+  padding-right: calc((100vw - 860px) / 2);
+  display: grid;
+  grid-template-columns: 320px auto;
+  gap: 60px;
+  justify-content: start; 
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+}
+
+.nav__link_active {
+  color: #F2F2F3;
+}
+.description {
+  text-align: left;
+}

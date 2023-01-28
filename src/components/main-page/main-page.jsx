@@ -2,11 +2,11 @@ import React from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearIngredient } from '../../services/reducers/ingredient-details';
-import { clearOrder } from '../../services/reducers/order';
-import { clearConstructor } from '../../services/reducers/constructor';
+import { clearIngredient } from '../../services/slices/ingredient-details-slice';
+import { clearOrder } from '../../services/slices/order-slice';
+import { clearConstructor } from '../../services/slices/constructor-slice';
 
-import Columns from '../columns/columns';
+import Columns from '../constructor-item/columns/columns';
 import mainStyles from './main-page.module.css'
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
@@ -20,10 +20,12 @@ const MainPage = () => {
 
   const dispatch = useDispatch()
   const closeModal = () => {
-    details
-      ? dispatch(clearIngredient())
-      : dispatch(clearOrder())
-        dispatch(clearConstructor())
+    if (details) {
+      dispatch(clearIngredient())
+    } else {
+      dispatch(clearOrder())
+      dispatch(clearConstructor())
+    }
   }
 
   return (

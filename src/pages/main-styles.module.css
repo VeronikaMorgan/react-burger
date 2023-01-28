@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper_lg {
+  composes: wrapper;
+  padding-top: 180px;
+}
+
+.wrapper_sm {
+  composes: wrapper;
+  padding-top: 120px;
+}
+.form_wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.options_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.options_first_wrapper{
+  composes: options_wrapper;
+  margin-top: 0;
+}
+
+.btn {
+  padding: 0;
+}

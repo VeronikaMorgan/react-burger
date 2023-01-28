@@ -1,4 +1,4 @@
-import { ADD_CONSTRUCTOR_ITEM, ADD_CONSTRUCTOR_BUN, DELETE_ITEM, UPDATE_ON_ITEM_MOVE, CLEAR_CONSTRUCTOR } from "../actions/constructor";
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const constructorState = {
@@ -7,7 +7,7 @@ const constructorState = {
 }
 
 export const constructorSlice = createSlice({
-  name: 'constructors',
+  name: 'burgerConstructor',
   initialState: {
     constructorItems: [],
     hasBun: false,

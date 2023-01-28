@@ -1,4 +1,4 @@
-import { SET_INGREDIENT_DETAILS, CLEAR_INGREDIENT_DETAILS } from "../actions/ingredient-details";
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const ingredientState = {

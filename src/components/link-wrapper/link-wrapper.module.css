@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.wrapper:first-of-type {
+  margin-top: 0;
+}
+.link {
+  color: #4C4CFF;
+  transition: color .5s ease-in-out;
+}
+
+.link:hover {
+  color: #ceceff;
+}
