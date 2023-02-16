@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import thunk from "redux-thunk";
 import { baseRequest, orderOptions } from "../../utils/api";
-
+import { getCookie } from "../../utils/cookie";
+import { refreshToken } from "./refresh-token-slice";
 
 export const getOrder = createAsyncThunk('order/get', async (dataIds, thunkAPI) => {
   try {
+    if(!getCookie('access')) {
+      thunkAPI.dispatch(refreshToken(getOrder))
+    }
     const data = await baseRequest('orders', orderOptions(dataIds))
     return data
   } catch (err) {

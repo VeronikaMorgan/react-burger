@@ -38,9 +38,9 @@ const AppHeader = () => {
           </nav>
         </li>
         <li className={headerStyles.logo__wrapper}>
-          <a href="" className={headerStyles.header__logo}>
+          <Link to="/" className={headerStyles.header__logo}>
             <Logo />
-          </a>
+          </Link>
         </li>
         <li className={headerStyles.profile}>
           <Link to='/profile' className={headerStyles.menu__link}>

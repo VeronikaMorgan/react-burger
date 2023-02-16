@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearIngredient } from '../../services/slices/ingredient-details-slice';
 import { clearOrder } from '../../services/slices/order-slice';
 import { clearConstructor } from '../../services/slices/constructor-slice';
+import { useNavigate } from 'react-router-dom';
 
 import Columns from '../constructor-item/columns/columns';
 import mainStyles from './main-page.module.css'
@@ -19,9 +20,12 @@ const MainPage = () => {
   const orderData = useSelector(store => store.order.order)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const closeModal = () => {
     if (details) {
       dispatch(clearIngredient())
+      navigate(-1, {state: {background: null}})
     } else {
       dispatch(clearOrder())
       dispatch(clearConstructor())
@@ -38,7 +42,7 @@ const MainPage = () => {
       </DndProvider>
       {details &&
         <Modal title='Детали ингредиента' closeModal={closeModal}>
-          <IngredientDetails data={details} />
+          <IngredientDetails/>
         </Modal>
       }
       {orderData &&

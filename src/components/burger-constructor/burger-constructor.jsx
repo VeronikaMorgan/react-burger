@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 
+import { useNavigate, useLocation } from 'react-router-dom';
+import { getCookie } from '../../utils/cookie';
 import { CurrencyIcon, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { addBun, addItem, updateConstructor } from '../../services/slices/constructor-slice';
 import { getOrder } from '../../services/slices/order-slice';
@@ -15,14 +17,24 @@ import itemStyles from '../constructor-item/constructor-item.module.css';
 
 
 const BurgerConstructor = () => {
+  const isLoggedIn = useSelector(store => store.user.isLoggedIn)
   const data = useSelector(store => store.burgerConstructor.constructorItems);
   const isLoading = useSelector(store => store.order.createOrderRequest);
   const dispatch = useDispatch()
-
-  const openOrderModal = (e) => {
-    e.preventDefault()
+  const navigate = useNavigate()
+  const location = useLocation()
+  
+  const openOrderModal = () => {
     const dataIds = data.map(item => [item._id])
     dispatch(getOrder(dataIds))
+  }
+  
+  const handleSubmitOrder = (e) => {
+    e.preventDefault()
+    if(!getCookie('access') || !isLoggedIn) {
+    return navigate('/login', {replace: true, state: {from: location.pathname}})
+    }
+    openOrderModal()
   }
 
   const [{ isOver }, dropRef] = useDrop({
@@ -87,7 +99,7 @@ const BurgerConstructor = () => {
         <div className={`${constructorStyles.checkout} mt-6`}>
           <p className='text text_type_digits-medium mr-2'>{getPrice}</p>
           <CurrencyIcon type='primary' />
-          <Button htmlType="button" type="primary" size="large" extraClass={`${constructorStyles.button} ml-10 mr-4`} onClick={(e) => openOrderModal(e)}>
+          <Button htmlType="button" type="primary" size="large" extraClass={`${constructorStyles.button} ml-10 mr-4`} onClick={(e) => handleSubmitOrder(e)}>
             {isLoading 
               ? <Loader />
               : 'Оформить заказ'}

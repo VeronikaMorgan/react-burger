@@ -1,15 +1,19 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import pageStyles from '../main-styles.module.css'
 import LinkWrapper from "../../components/link-wrapper/link-wrapper";
 
-import { register } from "../../services/slices/register-slice";
+import { register } from "../../services/thunks/userThunks";
+import { resetSignUp } from "../../services/slices/user-slice";
 import { nameValidator, emailValidator, passwordValidator } from "../../utils/validation";
 import { useForm } from "../../utils/use-form-hook";
+import { getCookie } from "../../utils/cookie";
 
 const SignUpPage = () => {
+  const {isLoggedIn, signUpSuccess} = useSelector( state => state.user)
   const formState = {
     name: '',
     email: '',
@@ -20,7 +24,9 @@ const SignUpPage = () => {
   const [isNameValid, setNameValidity] = useState(true)
   const [isEmailValid, setEmailValidity] = useState(true)
   const [isPasswordValid, setPasswordValidity] = useState(true)
+
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleNameChange = (e) => {
     const { value, validity: { valid } } = e.target
@@ -42,6 +48,21 @@ const SignUpPage = () => {
     e.preventDefault()
     dispatch(register(values))
   }
+  
+  useEffect(() => {
+    if(signUpSuccess) {
+      dispatch(resetSignUp())
+      navigate('/login', {replace: true})
+    }
+  }, [signUpSuccess])
+  useEffect(() => {
+    if(isLoggedIn || getCookie("access")) {
+      navigate('/profile', {replace: true})
+    }
+  }, [isLoggedIn, navigate, getCookie])
+
+  const isFormEmpty = values.email === '' || values.name === '' || values.password === '' ? true : null
+  const isFormInValid = !isPasswordValid || !isEmailValid || !isNameValid
   return (
     <main className={pageStyles.wrapper_lg}>
       <form className={`${pageStyles.form_wrapper} mb-15`} onSubmit={handleSubmit}>
@@ -63,8 +84,7 @@ const SignUpPage = () => {
           error={!isEmailValid}
           errorText={"некоректный адрес"}
           onChange={handleEmailChange} />
-        <Input
-          type={"password"}
+        <PasswordInput
           name={"password"}
           icon={"ShowIcon"}
           placeholder={"Пароль"}
@@ -73,7 +93,7 @@ const SignUpPage = () => {
           errorText={"некоректный пароль"}
           onChange={handlePasswordChange} />
 
-        <Button htmlType="submit" type="primary" size="medium" disabled={!isEmailValid && !isNameValid && !isPasswordValid}>
+        <Button htmlType="submit" type="primary" size="medium" disabled={ isFormInValid || isFormEmpty} >
           Зарегистрироваться
         </Button>
       </form>

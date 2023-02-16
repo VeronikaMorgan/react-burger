@@ -9,11 +9,9 @@ import ingredientsReducer from './services/slices/ingredients-slice';
 import orderReducer from './services/slices/order-slice';
 import ingredientReducer from './services/slices/ingredient-details-slice';
 import constructorReducer from './services/slices/constructor-slice';
-import registerReducer from './services/slices/register-slice';
-import loginReducer from './services/slices/login-slice';
 import tokenReducer from './services/slices/refresh-token-slice'
-import logoutReducer from './services/slices/logout-slice'
 import userReducer from './services/slices/user-slice'
+import passwordReducer from './services/slices/password-slice'
 import { BrowserRouter as Router} from 'react-router-dom';
 
 const store = configureStore({
@@ -22,11 +20,9 @@ const store = configureStore({
     ingredient: ingredientReducer,
     order: orderReducer,
     burgerConstructor: constructorReducer,
-    registration: registerReducer,
-    login: loginReducer,
     token: tokenReducer,
-    logout: logoutReducer,
-    user: userReducer
+    user: userReducer,
+    password: passwordReducer,
   }
 })
 

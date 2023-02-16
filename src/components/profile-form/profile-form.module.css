@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}

@@ -1,15 +1,27 @@
 import { getCookie } from "./cookie"
 
 export const BASE_URL = 'https://norma.nomoreparties.space/api/'
+
 export const orderOptions = (ids) => {
   return {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('access')}`,
     },
     body: JSON.stringify({
       "ingredients": ids
     })
+  }
+}
+export const getUserOptions = () => {
+  console.log(getCookie('access'))
+  return {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('access')}`,
+    }
   }
 }
 
@@ -35,8 +47,8 @@ export const loginOptions = (email, password) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "email": email,
-      "password": password,
+      email,
+      password,
     })
   }
 }
@@ -66,39 +78,40 @@ export const tokenOptions = () => {
   }
 }
 
-export const resetPasswordOptions = () => {
+export const sendResetEmailOptions = (email) => {
   return {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "token": getCookie('refresh')
+      email
     })
   }
 }
 
-export const getUserOptions = () => {
+export const resetPasswordOptions = ({password, code}) => {
   return {
-    method: 'GET',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      password,
+      "token": code
+    })
+  }
+}
+
+
+export const patchUserOptions = (data) => {
+  return {
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      'authorization': `Bearer ${getCookie('access')}`
+      Authorization: `Bearer ${getCookie('access')}`,
     },
-    body: JSON.stringify({
-    })
-  }
-}
-
-export const patchUserOptions = () => {
-  return {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      "token": getCookie('refresh')
-    })
+    body: JSON.stringify(data)
   }
 }
 

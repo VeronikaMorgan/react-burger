@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { tokenOptions, baseRequest } from "../../utils/api";
-import { setCookie, getCookie } from "../../utils/cookie";
+import { setCookie } from "../../utils/cookie";
 
 const refreshTokenState = {
   refreshTokenFailed: false,
@@ -9,12 +9,12 @@ const refreshTokenState = {
 }
 export const refreshToken = createAsyncThunk('refreshToken/fetch', async (thunk, thunkAPI) => {
   try {
-    const data = await baseRequest('auth/token', tokenOptions)
+    const data = await baseRequest('auth/token', tokenOptions())
     const {accessToken, refreshToken} = data
     setCookie('access', accessToken.split(' ')[1]);
     setCookie('refresh', refreshToken);
   
-    // позднее как то типизировать с приходом TS
+    // позднее типизировать с приходом TS
     if(typeof(thunk) === 'function') {
       thunkAPI.dispatch(thunk())
     }

@@ -1,14 +1,18 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useNavigate, useLocation } from "react-router-dom";
+import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import pageStyles from '../main-styles.module.css'
 import LinkWrapper from "../../components/link-wrapper/link-wrapper";
-import { setEmailValue, setPasswordValue } from "../../services/slices/login-slice";
 import { emailValidator, passwordValidator } from "../../utils/validation";
-import { login } from "../../services/slices/login-slice";
+import { login } from "../../services/thunks/userThunks";
 import { useForm } from "../../utils/use-form-hook";
+import { getCookie } from "../../utils/cookie";
+
 const LogInPage = () => {
+  const isLoggedIn = useSelector(store => store.user.isLoggedIn)
+
   const formState = {
     email: '',
     password: ''
@@ -18,6 +22,8 @@ const LogInPage = () => {
   const [isEmailValid, setEmailValidity] = useState(true)
   const [isPasswordValid, setPasswordValidity] = useState(true)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const handleEmailChange = (e) => {
     const { value, validity: { valid } } = e.target
@@ -34,6 +40,14 @@ const LogInPage = () => {
     e.preventDefault()
     dispatch(login(values))
   }
+  console.log(isLoggedIn)
+  useEffect(() => {
+    if(isLoggedIn || getCookie("access")) {
+      navigate(location.state?.from ? location.state?.from : '/', {replace: true})
+    }
+  }, [isLoggedIn, navigate, getCookie])
+
+  const isFormEmpty = values.email === '' || values.password === '' ? true : null
   return (
     <main className={pageStyles.wrapper_lg}>
       <form className={`${pageStyles.form_wrapper} mb-15`} onSubmit={handleSubmit}>
@@ -46,8 +60,7 @@ const LogInPage = () => {
           error={!isEmailValid}
           errorText={"некоректный адрес"}
           onChange={handleEmailChange} />
-        <Input
-          type={"password"}
+        <PasswordInput
           name={"password"}
           icon={"ShowIcon"}
           placeholder={"Пароль"}
@@ -55,7 +68,7 @@ const LogInPage = () => {
           error={!isPasswordValid}
           errorText={"некоректный пароль"}
           onChange={handlePasswordChange} />
-        <Button htmlType="submit" type="primary" size="medium" disabled={!isEmailValid || !isPasswordValid}>
+        <Button htmlType="submit" type="primary" size="medium" disabled={isFormEmpty || !isEmailValid || !isPasswordValid}>
           Войти
         </Button>
       </form>
