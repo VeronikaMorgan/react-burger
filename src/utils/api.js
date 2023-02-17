@@ -15,7 +15,6 @@ export const orderOptions = (ids) => {
   }
 }
 export const getUserOptions = () => {
-  console.log(getCookie('access'))
   return {
     method: 'GET',
     headers: {
@@ -125,4 +124,3 @@ export function checkResponse(res) {
 export function baseRequest(endpoint, options) {
   return fetch(`${BASE_URL}${endpoint}`, options).then(checkResponse)
 }
-

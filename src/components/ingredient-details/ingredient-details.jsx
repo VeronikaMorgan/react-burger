@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation} from "react-router-dom";
 import { setIngredient } from "../../services/slices/ingredient-details-slice";
 import detailsStyles from './ingredient-details.module.css';
 
@@ -10,14 +10,16 @@ const IngredientDetails = () => {
   const ingredientData = useSelector(store => store.ingredient.currentIngredient)
   const {ingredients} = useSelector(store => store.ingredients)
   const {id} = useParams()
+
   const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
-    if(!ingredientData?.name) {
+    if(!location?.state?.background) {
       setNotModal(true)
-      const currentIngredient = ingredients.find(i => i._id === id)
-      dispatch(setIngredient(currentIngredient))
     }
+    const currentIngredient = ingredients.find(i => i._id === id)
+    dispatch(setIngredient(currentIngredient))
   }, [ingredientData, ingredients])
 
   return (

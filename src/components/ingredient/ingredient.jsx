@@ -6,14 +6,10 @@ import { ingredientType } from "../../utils/types";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientStyles from './ingredient.module.css'
 import { useDrag } from "react-dnd";
-import { useSelector, useDispatch } from "react-redux";
-import { setIngredient } from "../../services/slices/ingredient-details-slice";
-// import { randomUUID } from "../../services/helpers/uuid-creator";
+import { useSelector} from "react-redux";
 
 const Ingredient = ({ data }) => {
   const constructorData = useSelector(store => store.burgerConstructor.constructorItems)
-
-  const dispatch = useDispatch()
   const location = useLocation()
 
   const counter = useMemo(() => {
@@ -30,13 +26,8 @@ const Ingredient = ({ data }) => {
     })
   })
 
-  const openIngredientModal = (e) => {
-    e.preventDefault()
-    dispatch(setIngredient(data))
-  }
-
   return (
-    <Link to={{ pathname:`/ingredients/${data._id}`, state: {background: location}}} className={`${ingredientStyles.wrapper} ${isDrag && ingredientStyles.wrapper_onDrag} link-default `} ref={dragRef} onClick={openIngredientModal}>
+    <Link to={`/ingredients/${data._id}`} state={{background: location}} className={`${ingredientStyles.wrapper} ${isDrag && ingredientStyles.wrapper_onDrag} link-default `} ref={dragRef}>
       <img src={data.image} alt={data.name} className={`${ingredientStyles.img} mr-4 ml-4`} />
       <div className={ingredientStyles.price}>
         <p className="text text_type_digits-default">{data.price}</p>

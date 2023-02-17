@@ -9,6 +9,7 @@ import { resetPassword } from "../../services/thunks/passwordThunks";
 import LinkWrapper from "../../components/link-wrapper/link-wrapper";
 import pageStyles from '../main-styles.module.css'
 import { getCookie } from "../../utils/cookie";
+
 const ResetPasswordPage = () => {
   const isLoggedIn = useSelector(store => store.user.isLoggedIn)
   const resetSuccess = useSelector(store => store.password.resetPasswordSuccess)

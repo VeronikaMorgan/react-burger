@@ -20,6 +20,7 @@ const BurgerConstructor = () => {
   const isLoggedIn = useSelector(store => store.user.isLoggedIn)
   const data = useSelector(store => store.burgerConstructor.constructorItems);
   const isLoading = useSelector(store => store.order.createOrderRequest);
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -31,7 +32,7 @@ const BurgerConstructor = () => {
   
   const handleSubmitOrder = (e) => {
     e.preventDefault()
-    if(!getCookie('access') || !isLoggedIn) {
+    if(!getCookie('access') && !isLoggedIn) {
     return navigate('/login', {replace: true, state: {from: location.pathname}})
     }
     openOrderModal()

@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import './index.css';
+import { BrowserRouter as Router} from 'react-router-dom';
+
 import App from './components/app/app';
 import reportWebVitals from './reportWebVitals';
 import ingredientsReducer from './services/slices/ingredients-slice';
@@ -12,7 +13,8 @@ import constructorReducer from './services/slices/constructor-slice';
 import tokenReducer from './services/slices/refresh-token-slice'
 import userReducer from './services/slices/user-slice'
 import passwordReducer from './services/slices/password-slice'
-import { BrowserRouter as Router} from 'react-router-dom';
+
+import './index.css';
 
 const store = configureStore({
   reducer: {

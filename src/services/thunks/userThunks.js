@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseRequest, getUserOptions, loginOptions, logoutOptions, registerOptions, patchUserOptions } from "../../utils/api";
 import { refreshToken } from "../slices/refresh-token-slice";
-import { getCookie, setCookie, deleteCookie } from "../../utils/cookie";
-
+import { setCookie, deleteCookie } from "../../utils/cookie";
+import { EXPIRY_MESSAGE } from "../../utils/constants";
 export const register = createAsyncThunk('auth/register', async (userData, thunkAPI) => {
   const { email, password, name } = userData;
   try {
@@ -15,13 +15,12 @@ export const register = createAsyncThunk('auth/register', async (userData, thunk
 
 export const getUser = createAsyncThunk('user/get', async (_, thunkAPI) => {
   try {
-    if(!getCookie('access')) {
-      thunkAPI.dispatch(refreshToken(getUser))
-      return;
-    }
     const data = await baseRequest('auth/user', getUserOptions())
     return data.user
   } catch (err) {
+    if(err === 'Oшибка 404') {
+      thunkAPI.dispatch(refreshToken(getUser))
+    }
     return thunkAPI.rejectWithValue(`something went wrong: ${err}`)
   }
 })
@@ -52,12 +51,12 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 
 export const patchUser = createAsyncThunk('user/patch', async (newData, thunkAPI) => {
   try {
-    if(!getCookie('access')) {
-      thunkAPI.dispatch(refreshToken(patchUser))
-    }
     const data = await baseRequest('auth/user', patchUserOptions(newData))
     return data.user
   } catch (err) {
+    if(err === 'Oшибка 404') {
+      thunkAPI.dispatch(refreshToken(getUser))
+    }
     return thunkAPI.rejectWithValue(`something went wrong: ${err}`)
   }
 })

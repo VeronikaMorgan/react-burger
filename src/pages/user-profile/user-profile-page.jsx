@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { getUser } from "../../services/thunks/userThunks";
+
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { logout } from "../../services/thunks/userThunks";

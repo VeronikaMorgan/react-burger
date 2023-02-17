@@ -5,10 +5,11 @@ import chop from '../../images/animation/chop.png'
 import salad from '../../images/animation/salad.png'
 import cheese from '../../images/animation/cheese.png'
 import top from '../../images/animation/top-bun.png'
-import styles from './wrong-route-page.module.css'
+import styles from './burger-animation.module.css'
 import pageStyles from '../main-styles.module.css'
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
+
 import { Link } from "react-router-dom";
+
 const WrongRoute = () => {
   return (
     <main className={pageStyles.wrapper_sm}>
