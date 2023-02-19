@@ -1,0 +1,1 @@
+export const EXPIRY_MESSAGE = "jwt expired";

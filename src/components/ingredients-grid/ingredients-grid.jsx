@@ -5,7 +5,7 @@ import gridStyles from './ingredients-grid.module.css'
 import Ingredient from "../ingredient/ingredient";
 
 const IngredientsGrid = ({ type }) => {
-  const ingredients = useSelector(store => store.ingredientsData.ingredients)
+  const ingredients = useSelector(store => store.ingredients.ingredients)
   return (
       <div className={`${gridStyles.grid} pt-6 pr-3 pb-10 pl-3`}>
         {Array.from(ingredients).filter(elem => elem.type === type).map(item => (

@@ -1,38 +1,53 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { ingredientType } from "../../utils/types";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useLocation} from "react-router-dom";
+import { setIngredient } from "../../services/slices/ingredient-details-slice";
 import detailsStyles from './ingredient-details.module.css';
 
-const IngredientDetails = ({ data }) => {
+const IngredientDetails = () => {
+  const [isNotModal, setNotModal] = useState(false)
+  const ingredientData = useSelector(store => store.ingredient.currentIngredient)
+  const {ingredients} = useSelector(store => store.ingredients)
+  const {id} = useParams()
+
+  const dispatch = useDispatch()
+  const location = useLocation()
+
+  useEffect(() => {
+    if(!location?.state?.background) {
+      setNotModal(true)
+    }
+    const currentIngredient = ingredients.find(i => i._id === id)
+    dispatch(setIngredient(currentIngredient))
+  }, [ingredientData, ingredients])
 
   return (
-    <div className={detailsStyles.wrapper}>
-      <img src={data.image_large} className='pr-5 pl-5' alt={data.name} />
-      <h3 className="text text_type_main-medium mt-4 mb-8">{data.name}</h3>
+    <div className={`${detailsStyles.wrapper} ${isNotModal && "mt-30"}`}>
+      {isNotModal && <h2 className="text text_type_main-large">Детали ингредиента</h2>}
+      <img src={ingredientData?.image_large} className='pr-5 pl-5' alt={ingredientData?.name} />
+      <h3 className="text text_type_main-medium mt-4 mb-8">{ingredientData?.name}</h3>
       <ul className={`${detailsStyles.value} list-default`}>
         <li className={detailsStyles.value__item}>
           <h4 className="text text_type_main-default text_color_inactive">Калории,ккал</h4>
-          <p className="text text_type_digits-default text_color_inactive">{data.calories}</p>
+          <p className="text text_type_digits-default text_color_inactive">{ingredientData?.calories}</p>
         </li>
         <li className={detailsStyles.value__item}>
           <h4 className="text text_type_main-default text_color_inactive">Белки, г</h4>
-          <p className="text text_type_digits-default text_color_inactive">{data.proteins}</p>
+          <p className="text text_type_digits-default text_color_inactive">{ingredientData?.proteins}</p>
         </li>
         <li className={detailsStyles.value__item}>
           <h4 className="text text_type_main-default text_color_inactive">Жиры, г</h4>
-          <p className="text text_type_digits-default text_color_inactive">{data.fat}</p>
+          <p className="text text_type_digits-default text_color_inactive">{ingredientData?.fat}</p>
         </li>
         <li className={detailsStyles.value__item}>
           <h4 className="text text_type_main-default text_color_inactive">Углеводы, г</h4>
-          <p className="text text_type_digits-default text_color_inactive">{data.carbohydrates}</p>
+          <p className="text text_type_digits-default text_color_inactive">{ingredientData?.carbohydrates}</p>
         </li>
       </ul>
     </div>
   )
 }
 
-IngredientDetails.propTypes = {
-  data: PropTypes.shape(ingredientType).isRequired
-}
 
 export default IngredientDetails

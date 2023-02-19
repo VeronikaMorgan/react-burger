@@ -1,17 +1,17 @@
 import React from "react";
 import { useMemo } from "react";
+import { Link, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { ingredientType } from "../../utils/types";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientStyles from './ingredient.module.css'
 import { useDrag } from "react-dnd";
-import { useSelector, useDispatch } from "react-redux";
-import { setIngredientDetails} from "../../services/actions/ingredient-details";
-// import { randomUUID } from "../../services/helpers/uuid-creator";
+import { useSelector} from "react-redux";
 
 const Ingredient = ({ data }) => {
-  const constructorData = useSelector(store => store.constructorData.constructorItems)
-  const dispatch = useDispatch()
+  const constructorData = useSelector(store => store.burgerConstructor.constructorItems)
+  const location = useLocation()
+
   const counter = useMemo(() => {
     return data.type === 'bun'
       ? constructorData.filter(item => item._id === data._id).length * 2
@@ -26,13 +26,8 @@ const Ingredient = ({ data }) => {
     })
   })
 
-  const openIngredientModal = (e) => {
-    e.preventDefault()
-    dispatch(setIngredientDetails(data))
-  }
-
   return (
-    <button className={`${ingredientStyles.wrapper} ${isDrag && ingredientStyles.wrapper_onDrag} btn-default`} ref={dragRef} onClick={(e) => openIngredientModal(e)}>
+    <Link to={`/ingredients/${data._id}`} state={{background: location}} className={`${ingredientStyles.wrapper} ${isDrag && ingredientStyles.wrapper_onDrag} link-default `} ref={dragRef}>
       <img src={data.image} alt={data.name} className={`${ingredientStyles.img} mr-4 ml-4`} />
       <div className={ingredientStyles.price}>
         <p className="text text_type_digits-default">{data.price}</p>
@@ -40,7 +35,7 @@ const Ingredient = ({ data }) => {
       </div>
       <p className="text text_type_main-default">{data.name}</p>
       {counter > 0 && <Counter count={counter} size='default' />}
-    </button>
+    </Link>
   )
 }
 

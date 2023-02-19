@@ -36,6 +36,9 @@
   color: var(--main-txt-color);
   text-decoration: none;
 }
+.menu__link_active {
+  color: #8585AD
+}
 .header__logo {
   height:fit-content;
   display: flex;

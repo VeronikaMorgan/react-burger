@@ -1,0 +1,365 @@
+.animation_wrapper {
+  height: 250px;
+  position: relative;
+  margin-right: 150px;
+}
+
+.bun_bottom {
+  opacity: 0;
+  position: absolute;
+  animation: bun-bottom 1s cubic-bezier(0.54, 0.14, 0.28, 1.22) 1 forwards, jump-bottom 2s cubic-bezier(0.22, 0.61, 0.46, 0.99) 6s 1 forwards;
+  z-index: 1;
+}
+.salad {
+  opacity: 0;
+  position: absolute;
+  animation: salad  1s cubic-bezier(0.54, 0.14, 0.28, 1.22) 1s 1 forwards, jump-salad 2s cubic-bezier(0.22, 0.61, 0.46, 0.99) 6s 1 forwards;
+  z-index: 2;
+  top: -48px;
+  left: -28px;
+}
+
+.chop {
+  opacity: 0;
+  position: absolute;
+  animation:  chop 1s cubic-bezier(0.54, 0.14, 0.28, 1.22) 2s 1 forwards, jump-chop 2s cubic-bezier(0.22, 0.61, 0.46, 0.99) 6s   1 forwards;
+  z-index: 3;
+  left: -33px;
+}
+
+.onion {
+  opacity: 0;
+  position: absolute;
+  animation: onion  1s cubic-bezier(0.54, 0.14, 0.28, 1.22) 3s 1 forwards, jump-onion 2s cubic-bezier(0.22, 0.61, 0.46, 0.99) 6s 1 forwards;
+  z-index: 4;
+  left: -52px;
+}
+
+.cheese {
+  opacity: 0;
+  position: absolute;
+  animation: cheese  1s cubic-bezier(0.54, 0.14, 0.28, 1.22) 4s 1 forwards, jump-cheese 2s cubic-bezier(0.22, 0.61, 0.46, 0.99) 6s  1 forwards;
+  z-index: 5;
+  left: -46px;
+}
+
+.bun_top {
+  opacity: 0;
+  position: absolute;
+  animation: top 1s cubic-bezier(0.54, 0.14, 0.28, 1.22) 5s 1 forwards, jump-top 2s cubic-bezier(0.22, 0.61, 0.46, 0.99) 6s forwards;
+  z-index: 6;
+  left: -51px;
+}
+
+@keyframes bun-bottom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: translateY(150px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(150px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes salad {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: translateY(135px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(135px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes chop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: translateY(120px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes onion {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: translateY(90px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(90px) scale(1);
+    opacity: 1;
+  }
+}
+
+
+@keyframes cheese {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+ 
+  50% {
+    opacity: 1;
+    transform: translateY(70px) scale(1);
+  }
+  100% {
+    transform: translateY(70px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes top {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  50% {
+    transform: translateY(50px) scale(1);
+    opacity: 1;
+  
+  }
+  100% {
+    transform: translateY(50px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes jump-bottom {
+  0% {
+    transform: translateY(150px)
+  }
+  50% {
+    transform: translateY(170px)
+  }
+  100% {
+    transform: translateY(150px)
+  }
+}
+
+@keyframes jump-salad {
+  0% {
+    transform: translateY(150px)
+  }
+  50% {
+    transform: translateY(160px)
+  }
+  100% {
+    transform: translateY(150px)
+  }
+}
+
+@keyframes jump-chop {
+  0% {
+    transform: translateY(120px)
+  }
+  50% {
+    transform: translateY(115px)
+  }
+  100% {
+    transform: translateY(120px)
+  }
+}
+
+@keyframes jump-onion {
+  0% {
+    transform: translateY(90px)
+  }
+  50% {
+    transform: translateY(60px)
+  }
+  100% {
+    transform: translateY(90px)
+  }
+}
+
+@keyframes jump-cheese {
+  0% {
+    transform: translateY(70px)
+  }
+  50% {
+    transform: translateY(30px)
+  }
+  100% {
+    transform: translateY(70px)
+  }
+}
+
+@keyframes jump-top {
+  0% {
+    transform: translateY(50px)
+  }
+  50% {
+    transform: translateY(0px)
+  }
+  100% {
+    transform: translateY(50px)
+  }
+}
+
+
+/* .animation_wrapper {
+  max-height: 300px;
+  position: relative;
+}
+
+.bun_bottom {
+  opacity: 0;
+  position: absolute;
+  animation: bun-bottom  ease-in-out 1 forwards;
+  z-index: 1;
+}
+.salad {
+  opacity: 0;
+  position: absolute;
+  animation: salad  1s ease-in-out 2s 1 forwards;
+  z-index: 2;
+  top: -48px;
+  left: -28px;
+}
+
+.chop {
+  opacity: 0;
+  position: absolute;
+  animation: chop 1s ease-in-out 3s 1 forwards;
+  z-index: 3;
+  left: -33px;
+}
+
+.onion {
+  opacity: 0;
+  position: absolute;
+  animation: onion  1s ease-in-out 4s 1 forwards;
+  z-index: 4;
+  left: -52px;
+}
+
+.cheese {
+  opacity: 0;
+  position: absolute;
+  animation: cheese  1s ease-in-out 5s 1 forwards;
+  z-index: 5;
+  left: -46px;
+}
+
+.bun_top {
+  opacity: 0;
+  position: absolute;
+  animation: top  1s ease-in-out 6s forwards;
+  z-index: 6;
+  left: -51px;
+}
+
+@keyframes bun-bottom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  5% {
+    opacity: 1;
+  }
+  10% {
+    transform: translateY(150px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(150px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(150px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes salad {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(135px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes chop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes onion {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(90px) scale(1);
+    opacity: 1;
+  }
+}
+
+
+@keyframes cheese {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(70px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes top {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+  
+  }
+  100% {
+    transform: translateY(50px) scale(1);
+    opacity: 1;
+  }
+} */
