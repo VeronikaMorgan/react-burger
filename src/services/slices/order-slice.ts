@@ -5,12 +5,8 @@ import { getCookie } from "../../utils/cookie";
 import { refreshToken } from "./refresh-token-slice";
 
 export const getOrder = createAppAsyncThunk('order/get', async (dataIds: string[][], thunkAPI) => {
-  try {
     const data = await baseRequest('orders', orderOptions(dataIds))
     return data
-  } catch (err) {
-    return thunkAPI.rejectWithValue(`someting went wrong: ${err}`)
-  }
 })
 
 type TOrderState = {

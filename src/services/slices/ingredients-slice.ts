@@ -16,12 +16,8 @@ const initialState: TIngredientsState = {
 }
 
 export const getIngredients = createAsyncThunk('ingredients/get', async (_, thunkAPI) => {
-  try {
     const data = await baseRequest('ingredients');
     return data.data;
-  } catch (err) {
-    return thunkAPI.rejectWithValue(`someting went wrong: ${err}`)
-  }
 })
 
 export const ingredientsSlice = createSlice({

@@ -15,12 +15,11 @@ const refreshTokenState: TRefreshState = {
   errorMessage: ''
 }
 export const refreshToken = createAppAsyncThunk('refreshToken/fetch', async (_, thunkAPI) => {
-  try {
     const data = await baseRequest('auth/token', tokenOptions())
     deleteCookie("access")
     deleteCookie("refresh")
     const {accessToken, refreshToken} = data
-    
+
     setCookie('access', accessToken.split(' ')[1]);
     setCookie('refresh', refreshToken);
     // позднее типизировать с приходом TS
@@ -28,9 +27,6 @@ export const refreshToken = createAppAsyncThunk('refreshToken/fetch', async (_, 
     //   thunkAPI.dispatch(thunk())
     // }
     return data
-  } catch (err) {
-    return thunkAPI.rejectWithValue(`someting went wrong: ${err}`)
-  }
 })
 
 const refreshTokenSlice = createSlice({
