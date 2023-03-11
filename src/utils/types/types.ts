@@ -1,4 +1,9 @@
 import React from "react"
+import { DIGITS, STRING } from "../constants";
+
+export type TLocationState = {
+  background : any | null;
+}
 
 export interface Iingredient {
   _id: string,
@@ -13,7 +18,7 @@ export interface Iingredient {
    image_mobile: string,
    image_large: string,
    __v: number,
-   uuid?: number
+   nanoid?: string
 }
 
 export interface IModalOverlay {
@@ -22,7 +27,8 @@ export interface IModalOverlay {
 }
 
 export interface IModal extends IModalOverlay {
-  title?: string
+  title?: string,
+  titleType?: typeof DIGITS | typeof STRING
 }
 
 export interface IOrder {

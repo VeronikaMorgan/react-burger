@@ -8,7 +8,7 @@ import formStyles from './profile-form.module.css';
 import { getUser } from "../../services/thunks/userThunks";
 import { useForm } from "../../utils/hooks/use-form-hook";
 import { patchUser } from "../../services/thunks/userThunks";
-import { TPatchUserData } from "../../utils/types";
+import { TPatchUserData } from "../../utils/types/types";
 
 const ProfileForm: FC = () => {
   const userData = useAppSelector(store => store.user.userData)
@@ -22,17 +22,19 @@ const ProfileForm: FC = () => {
   const { values, handleChange, setValues } = useForm<TPatchUserData>(formState)
   const [areButtonsVisible, setButtonsVisible] = useState<boolean>(false)
   const [isNameFocus, setNameFocus] = useState<boolean>(false)
+  const [isEmailFocus, setEmailFocus] = useState<boolean>(false)
+  const [isPasswordFocus, setPasswordFocus] = useState<boolean>(false)
+
   const [isNameValid, setNameValidity] = useState<boolean>(true)
   const [isEmailValid, setEmailValidity] = useState<boolean>(true)
   const [isPasswordValid, setPasswordValidity] = useState<boolean>(true)
   const [isPasswordDirty, setPasswordDirty] = useState<boolean>(false)
+
   const [isNameChanged, setNameChanged] = useState<boolean>(false)
   const [isEmailChanged, setEmailChanged] = useState<boolean>(false)
   const [isPasswordChanged, setPasswordChanged] = useState<boolean>(false)
 
   const dispatch = useAppDispatch()
-  
-  const nameRef = useRef<HTMLInputElement>(null)
    
   useEffect(() => {
     if(!userData.name) {
@@ -67,19 +69,23 @@ const ProfileForm: FC = () => {
     setPasswordValidity(!!valid && passwordValidator(value))
   }
 
-  const onIconClick = () => {
-   setNameFocus(true)
-   nameRef?.current?.focus()
-  }
-  const handleEdit = () => {
+  // const onIconClick = () => {
+  //  setNameFocus(true)
+  //  nameRef?.current?.focus()
+  // }
+  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     const newData: TPatchUserData = {}
     isNameChanged && (newData.name = values.name)
     isEmailChanged && (newData.email = values.email)
     isPasswordChanged && (newData.password = values.password)
     dispatch(patchUser(newData))
-    setButtonsVisible(false)
+    setNameChanged(false)
+    setEmailChanged(false)
+    setPasswordChanged(false)
+    setPasswordDirty(false)
   }
-
+  
   const handleReset = () => {
     setValues({...userData, password: ''})
     setNameValidity(true)
@@ -92,7 +98,7 @@ const ProfileForm: FC = () => {
   }
   
   return (
-    <form className={formStyles.wrapper}>
+    <form className={formStyles.wrapper} onSubmit={(e) => handleEdit(e)}>
       <Input
         type={"text"}
         name={"name"}
@@ -102,32 +108,40 @@ const ProfileForm: FC = () => {
         error={!isNameValid}
         errorText={"имя должно быть длиннее 5 символов"}
         onChange={handleNameChange}
-        onIconClick={onIconClick}
-        ref={nameRef}
         disabled={!isNameFocus}
         onBlur={() => setNameFocus(false)}
+        onIconClick={() => setNameFocus(true)}
       />
-      <EmailInput
+      <Input
+        type={"email"}
         name={"email"}
         placeholder="E-mail"
-        isIcon={true}
+        icon={"EditIcon"}
         value={values.email || ''}
-        aria-invalid={!isEmailValid}
-        aria-errormessage={"некоректный адрес"}
+        error={!isEmailValid}
+        errorText={"некорректный формат"}
         onChange={handleEmailChange}
+        disabled={!isEmailFocus}
+        onBlur={() => setEmailFocus(false)}
+        onIconClick={() => setEmailFocus(true)}
       />
-      <PasswordInput
+      <Input
+        type={"password"}
         name={"password"}
         icon="EditIcon"
         placeholder={"Пароль"}
         value={values.password || ''}
-        aria-invalid={!isPasswordValid}
-        aria-errormessage={"пароль должен быть длиннее 5 символов"}
-        onChange={handlePasswordChange} />
+        error={!isPasswordValid}
+        errorText={"пароль должен быть длиннее 5 символов"}
+        onChange={handlePasswordChange}
+        disabled={!isPasswordFocus}
+        onBlur={() => setPasswordFocus(false)}
+        onIconClick={() => setPasswordFocus(true)} />
+
       {areButtonsVisible ?
         <div className={formStyles.buttons}>
           <Button htmlType="button" type="primary" size="small" onClick={handleReset}><p className="text text_type_main-small">Отмена</p></Button>
-          <Button htmlType="button" type="primary" size="small" onClick={handleEdit} disabled={!isNameValid || !isEmailValid || !isPasswordValid}><p className="text text_type_main-small">Сохранить</p></Button>
+          <Button htmlType="submit" type="primary" size="small" disabled={!isNameValid || !isEmailValid || !isPasswordValid}><p className="text text_type_main-small">Сохранить</p></Button>
         </div>
         : null}
     </form>

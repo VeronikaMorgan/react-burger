@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { baseRequest } from '../../utils/api';
-import { Iingredient } from "../../utils/types";
+import { Iingredient } from "../../utils/types/types";
 
 type TIngredientsState = {
   getIngredientsFailed: boolean

@@ -9,7 +9,7 @@ import { emailValidator, passwordValidator } from "../../utils/validation";
 import { login } from "../../services/thunks/userThunks";
 import { useForm } from "../../utils/hooks/use-form-hook";
 import { getCookie } from "../../utils/cookie";
-import { TUserData } from "../../utils/types";
+import { TUserData } from "../../utils/types/types";
 
 const LogInPage: FC = () => {
   const isLoggedIn = useAppSelector(store => store.user.isLoggedIn)

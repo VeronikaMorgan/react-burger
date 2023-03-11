@@ -1,6 +1,6 @@
 import { createAppAsyncThunk } from "../../utils/hooks/app-hooks";
 import { baseRequest, sendResetEmailOptions, resetPasswordOptions } from "../../utils/api";
-import { TResetData } from "../../utils/types";
+import { TResetData } from "../../utils/types/types";
 
 export const sendResetEmail = createAppAsyncThunk('password/sendEmail', async (email: string, thunkAPI) => {
     const data = await baseRequest('password-reset', sendResetEmailOptions(email))

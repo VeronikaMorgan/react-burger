@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks/app-hooks";
 import { useParams, useLocation} from "react-router-dom";
 import { setIngredient } from "../../services/slices/ingredient-details-slice";
 import detailsStyles from './ingredient-details.module.css';
-import { Iingredient } from "../../utils/types";
-import { TLocationState } from "../app/app";
+import { Iingredient } from "../../utils/types/types";
+import { TLocationState } from "../../utils/types/types";
 
 const IngredientDetails: FC = () => {
 
