@@ -9,6 +9,7 @@ import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burge
 import { getOrderPrice, getStatus } from "../../utils/helpers";
 import { prepareIngredients } from "../../utils/prepare-ingredients";
 import { PUBLIC, PRIVATE } from "../../services/slices/orders-slice";
+import { DONE } from "../../utils/constants";
 import { wsTypes } from "../../utils/types/ws-types";
 import detailsStyles from './feed-details.module.css';
 
@@ -60,12 +61,14 @@ const FeedDetails: FC<TFeedDetails> = ({type}) => {
     preparedData && setPrice(getOrderPrice(preparedData))
   }, [preparedData])
 
+  const textColor:string = orderData?.status === DONE ? '#00CCCC' : '#F2F2F3'
+  console.log(textColor)
   return (
     orderData &&
     <div className={`${detailsStyles.wrapper} ${isNotModal && 'mt-15'}`}>
       {isNotModal && <p className={`${detailsStyles.number} text text_type_digits-default`}>#{orderData?.number}</p>}
       <h2 className={`${detailsStyles.title} text text_type_main-medium mt-10 mb-3 my-scroll text-left`}>{orderData?.name}</h2>
-      <p className="text text_type_main-default">{getStatus(orderData.status)}</p>
+      <p className="text text_type_main-default" style={{color: textColor}}>{getStatus(orderData.status)}</p>
       <h3 className="text text_type_main-medium mt-15 mb-6">Состав:</h3>
       <ul className={`${detailsStyles.list_wrapper} list-default my-scroll`}>
         {
