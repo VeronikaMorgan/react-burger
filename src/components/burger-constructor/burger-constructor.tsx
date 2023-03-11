@@ -14,11 +14,13 @@ import ConstructorItem from '../constructor-item/constructor-item';
 import Loader from '../loader/loader';
 import constructorStyles from './burger-constructor.module.css';
 import itemStyles from '../constructor-item/constructor-item.module.css';
-import { Iingredient } from '../../utils/types';
+import { Iingredient } from '../../utils/types/types';
+import { getOrderPrice } from '../../utils/helpers';
 
 const BurgerConstructor: FC = () => {
   const isLoggedIn = useAppSelector(store => store.user.isLoggedIn)
   const data = useAppSelector(store => store.burgerConstructor.constructorItems);
+  const hasBun = useAppSelector(store => store.burgerConstructor.hasBun)
   const isLoading = useAppSelector(store => store.order.createOrderRequest);
 
   const dispatch = useAppDispatch()
@@ -62,7 +64,7 @@ const BurgerConstructor: FC = () => {
   }, [data])
 
   const getPrice = useMemo<number>(() => {
-    return Array.from(data).reduce((acc, i) => { return i.type === 'bun' ? acc + i.price * 2 : acc + i.price }, 0);
+    return getOrderPrice(data)
   }, [data])
 
   return (
@@ -80,7 +82,7 @@ const BurgerConstructor: FC = () => {
       })}
       <ul className={`${constructorStyles.list} list-default my-scroll pr-2`} >
         {data.map((item, i) => (item.type !== 'bun' &&
-          <li key={`${item.uuid}`}>
+          <li key={`${item.nanoid}`}>
             <ConstructorItem data={item} id={item._id} index={i} moveItemHandler={moveItemHandler} />
           </li>
         ))}
@@ -100,7 +102,7 @@ const BurgerConstructor: FC = () => {
         <div className={`${constructorStyles.checkout} mt-6`}>
           <p className='text text_type_digits-medium mr-2'>{getPrice}</p>
           <CurrencyIcon type='primary' />
-          <Button htmlType="button" type="primary" size="large" extraClass={`${constructorStyles.button} ml-10 mr-4`} onClick={handleSubmitOrder}>
+          <Button htmlType="button" type="primary" size="large" extraClass={`${constructorStyles.button} ml-10 mr-4`} onClick={handleSubmitOrder} disabled={!hasBun || data.length <= 1}>
             {isLoading
               ? <Loader />
               : 'Оформить заказ'}

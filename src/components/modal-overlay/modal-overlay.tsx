@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import overlayStyles from './modal-overlay.module.css';
-import { IModalOverlay } from "../../utils/types";
+import { IModalOverlay } from "../../utils/types/types";
 
 const ModalOverlay: FC<IModalOverlay> = ({children, closeModal}) => {
   return (

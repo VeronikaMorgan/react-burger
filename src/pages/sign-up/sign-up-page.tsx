@@ -11,7 +11,7 @@ import { resetSignUp } from "../../services/slices/user-slice";
 import { nameValidator, emailValidator, passwordValidator } from "../../utils/validation";
 import { useForm } from "../../utils/hooks/use-form-hook";
 import { getCookie } from "../../utils/cookie";
-import { TUserSignUpData } from "../../utils/types";
+import { TUserSignUpData } from "../../utils/types/types";
 
 const SignUpPage:FC = () => {
   const {isLoggedIn, signUpSuccess} = useAppSelector( state => state.user)

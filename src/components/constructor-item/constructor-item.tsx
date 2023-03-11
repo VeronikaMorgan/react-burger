@@ -6,7 +6,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import { useAppDispatch } from "../../utils/hooks/app-hooks";
 import { deleteItem } from "../../services/slices/constructor-slice";
 import itemStyles from './constructor-item.module.css'
-import { IConstructorItem } from "../../utils/types";
+import { IConstructorItem } from "../../utils/types/types";
 
 interface IDragItem {
   id: string

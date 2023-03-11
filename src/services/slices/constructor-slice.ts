@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Iingredient } from "../../utils/types";
+import { Iingredient } from "../../utils/types/types";
 
 interface IConstructorState {
   constructorItems: Iingredient[]
@@ -26,7 +26,7 @@ export const constructorSlice = createSlice({
     },
     deleteItem: (state, action: PayloadAction<Iingredient>) => {
       if(action.payload.type !== 'bun') {
-        state.constructorItems = state.constructorItems.filter(item => item.uuid !== action.payload.uuid)
+        state.constructorItems = state.constructorItems.filter(item => item.nanoid !== action.payload.nanoid)
       }
     },
     updateConstructor: (state, action) => {state.constructorItems = action.payload},

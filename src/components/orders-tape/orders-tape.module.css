@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-height: calc(100vh - 230px);
+  overflow-y: auto;
+  gap: 16px;
+  padding-right: 8px;
+
+}
+
+.title {
+  text-align: left;
+  /* margin-left: 12px; */
+  margin-bottom: 16px;
+}

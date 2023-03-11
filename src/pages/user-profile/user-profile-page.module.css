@@ -1,11 +1,18 @@
-.wrapper {
+.container {
   padding-top: 120px;
-  padding-left: calc((100vw - 860px) / 2);
-  padding-right: calc((100vw - 860px) / 2);
+  padding-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  min-width: 1230px;
   display: grid;
   grid-template-columns: 320px auto;
   gap: 60px;
-  justify-content: start; 
+  justify-items: start;
+  align-items: start;
 }
 
 .nav {

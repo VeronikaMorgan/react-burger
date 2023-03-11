@@ -22,10 +22,7 @@ export const refreshToken = createAppAsyncThunk('refreshToken/fetch', async (_, 
 
     setCookie('access', accessToken.split(' ')[1]);
     setCookie('refresh', refreshToken);
-    // позднее типизировать с приходом TS
-    // if(typeof(thunk) === 'function') {
-    //   thunkAPI.dispatch(thunk())
-    // }
+    
     return data
 })
 

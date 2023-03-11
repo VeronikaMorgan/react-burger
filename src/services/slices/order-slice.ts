@@ -1,12 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { baseRequest, orderOptions } from "../../utils/api";
+import {  orderOptions, requestWithRefresh } from "../../utils/api";
 import { createAppAsyncThunk } from "../../utils/hooks/app-hooks";
-import { getCookie } from "../../utils/cookie";
-import { refreshToken } from "./refresh-token-slice";
 
 export const getOrder = createAppAsyncThunk('order/get', async (dataIds: string[][], thunkAPI) => {
-    const data = await baseRequest('orders', orderOptions(dataIds))
-    return data
+    const data = await requestWithRefresh('orders', orderOptions(dataIds))
+    return data.order
 })
 
 type TOrderState = {

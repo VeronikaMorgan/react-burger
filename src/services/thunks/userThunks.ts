@@ -1,10 +1,10 @@
 import { createAppAsyncThunk } from "../../utils/hooks/app-hooks";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { baseRequest,newBaseRequest, getUserOptions, loginOptions, logoutOptions, registerOptions, patchUserOptions } from "../../utils/api";
+import { getCookie } from "../../utils/cookie";
+import { requestWithRefresh,baseRequest, getUserOptions, loginOptions, logoutOptions, registerOptions, patchUserOptions } from "../../utils/api";
 import { refreshToken } from "../slices/refresh-token-slice";
 import { setCookie, deleteCookie } from "../../utils/cookie";
 import { EXPIRY_MESSAGE } from "../../utils/constants";
-import { TUserData, TPatchUserData, TUserSignUpData } from "../../utils/types";
+import { TUserData, TPatchUserData, TUserSignUpData } from "../../utils/types/types";
 
 export const register = createAppAsyncThunk('auth/register', async (userData: TUserSignUpData, thunkAPI) => {
   const { email, password, name } = userData;
@@ -14,13 +14,7 @@ export const register = createAppAsyncThunk('auth/register', async (userData: TU
 
 
 export const getUser = createAppAsyncThunk('user/get', async (_, thunkAPI) => {
-    const res = await newBaseRequest('auth/user', getUserOptions())
-    if(res.status === 403) {
-      console.log(res.status)
-      thunkAPI.dispatch(refreshToken())
-      return;
-    }
-    const data = await res.json()
+    const data = await requestWithRefresh('auth/user',getUserOptions())
     return data.user
 })
 
@@ -41,11 +35,6 @@ export const logout = createAppAsyncThunk('auth/logout', async (_, thunkAPI) => 
 })
 
 export const patchUser = createAppAsyncThunk('user/patch', async (newData: TPatchUserData, thunkAPI) => {
-    const res = await baseRequest('auth/user', patchUserOptions(newData))
-    if(res.status === 403) {
-      thunkAPI.dispatch(refreshToken())
-      return;
-    }
-    const data = await res.json()
+    const data = await requestWithRefresh('auth/user', patchUserOptions(newData))
     return data.user
 })
