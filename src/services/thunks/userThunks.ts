@@ -1,6 +1,6 @@
 import { createAppAsyncThunk } from "../../utils/hooks/app-hooks";
 import { getCookie } from "../../utils/cookie";
-import { requestWithRefresh,baseRequest, getUserOptions, loginOptions, logoutOptions, registerOptions, patchUserOptions } from "../../utils/api";
+import { fetchWithRefresh,baseRequest, getUserOptions, loginOptions, logoutOptions, registerOptions, patchUserOptions } from "../../utils/api";
 import { refreshToken } from "../slices/refresh-token-slice";
 import { setCookie, deleteCookie } from "../../utils/cookie";
 import { EXPIRY_MESSAGE } from "../../utils/constants";
@@ -14,7 +14,7 @@ export const register = createAppAsyncThunk('auth/register', async (userData: TU
 
 
 export const getUser = createAppAsyncThunk('user/get', async (_, thunkAPI) => {
-    const data = await requestWithRefresh('auth/user',getUserOptions())
+    const data = await fetchWithRefresh('auth/user',getUserOptions())
     return data.user
 })
 
@@ -35,6 +35,6 @@ export const logout = createAppAsyncThunk('auth/logout', async (_, thunkAPI) => 
 })
 
 export const patchUser = createAppAsyncThunk('user/patch', async (newData: TPatchUserData, thunkAPI) => {
-    const data = await requestWithRefresh('auth/user', patchUserOptions(newData))
+    const data = await fetchWithRefresh('auth/user', patchUserOptions(newData))
     return data.user
 })

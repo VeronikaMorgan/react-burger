@@ -6,6 +6,7 @@ import { TOrderData } from "../../utils/types/ws-types";
 
 const OrdersTape:FC = () => {
   const ordersData = useAppSelector(store => store.orders.public.orders)
+
   return (
     <section>
       <h1 className={`${tapeStyles.title} text text_type_main-large`}>Лента заказов</h1>

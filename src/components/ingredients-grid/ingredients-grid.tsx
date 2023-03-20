@@ -10,6 +10,7 @@ interface IngredientsGridProps {
 
 const IngredientsGrid: FC<IngredientsGridProps> = ({ type }) => {
   const ingredients = useAppSelector(store => store.ingredients.ingredients)
+  console.log(ingredients)
   return (
       <div className={`${gridStyles.grid} pt-6 pr-3 pb-10 pl-3`}>
         {Array.from(ingredients).filter(elem => elem.type === type).map(item => (

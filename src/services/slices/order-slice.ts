@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {  orderOptions, requestWithRefresh } from "../../utils/api";
+import {  orderOptions, fetchWithRefresh } from "../../utils/api";
 import { createAppAsyncThunk } from "../../utils/hooks/app-hooks";
 
 export const getOrder = createAppAsyncThunk('order/get', async (dataIds: string[][], thunkAPI) => {
-    const data = await requestWithRefresh('orders', orderOptions(dataIds))
+    const data = await fetchWithRefresh('orders', orderOptions(dataIds))
     return data.order
 })
 
