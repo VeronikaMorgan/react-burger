@@ -6,8 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientStyles from './ingredient.module.css'
 import { useDrag } from "react-dnd";
-import { useAppSelector, useAppDispatch } from "../../utils/hooks/app-hooks";
-import { setIngredientSelected } from "../../services/slices/ingredient-details-slice";
+import { useAppSelector } from "../../utils/hooks/app-hooks";
 import { Iingredient } from "../../utils/types/types";
 
 interface IngredientProps {
@@ -17,7 +16,7 @@ interface IngredientProps {
 const Ingredient: FC<IngredientProps> = ({ data }) => {
   const constructorData = useAppSelector(store => store.burgerConstructor.constructorItems)
   const location = useLocation()
-  const dispatch = useAppDispatch()
+
   const counter = useMemo<number>(() => {
     return data.type === 'bun'
       ? constructorData.filter(item => item._id === data._id).length * 2
@@ -33,10 +32,6 @@ const Ingredient: FC<IngredientProps> = ({ data }) => {
       isDrag: monitor.isDragging()
     })
   })
-
-  // const setSelected = () => {
-  //   dispatch(setIngredientSelected())
-  // }
 
   return (
     <Link to={`/ingredients/${data._id}`} state={{background: location}} className={`${ingredientStyles.wrapper} ${isDrag && ingredientStyles.wrapper_onDrag} link-default `} ref={dragRef}>

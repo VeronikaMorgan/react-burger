@@ -7,6 +7,7 @@ import FeedDetailsItem from "../feed-details-item/feed-details-item";
 import { setOrderDetails } from "../../services/slices/order-details-sub-slice";
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getOrderPrice, getStatus } from "../../utils/helpers";
+import { filterByQwty } from "../../utils/helpers";
 import { prepareIngredients } from "../../utils/prepare-ingredients";
 import { PUBLIC, PRIVATE } from "../../services/slices/orders-slice";
 import { DONE } from "../../utils/constants";
@@ -53,7 +54,10 @@ const FeedDetails: FC<TFeedDetails> = ({type}) => {
     currentOrder && dispatch(setOrderDetails(currentOrder))
     if(orderData) {
       const sortedData = prepareIngredients(orderData?.ingredients, ingredients)
-      sortedData && setPreparedData(sortedData)
+      if(sortedData) {
+        const filteredByQwt = filterByQwty(sortedData)
+        setPreparedData(filteredByQwt)
+      }
     }
   }, [orderData, publicOrders, privateOrders])
 
@@ -62,7 +66,7 @@ const FeedDetails: FC<TFeedDetails> = ({type}) => {
   }, [preparedData])
 
   const textColor:string = orderData?.status === DONE ? '#00CCCC' : '#F2F2F3'
-  console.log(textColor)
+ 
   return (
     orderData &&
     <div className={`${detailsStyles.wrapper} ${isNotModal && 'mt-15'}`}>

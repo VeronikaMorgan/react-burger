@@ -38,7 +38,7 @@ const App: FC = () => {
   const isPrivateRun = useAppSelector(store => store.orders.private.isWsConnected)
   const ingredientSelected = useAppSelector(store => store.ingredient.currentIngredient);
 
-  const orderSelected = useAppSelector(store => store.orders.details.isOrderSelected)
+  const orderSelected = useAppSelector(store => store.orders.details.currentOrder)
   const orderNumber = useAppSelector(store => store.orders.details.currentOrder?.number)
 
   const dispatch = useAppDispatch()
@@ -62,6 +62,7 @@ const App: FC = () => {
       dispatch(clearConstructor())
     }
   }
+  console.log(orderSelected)
 
   useEffect(() => {
     if (location.pathname.includes('/feed') && !isPublicRun) {

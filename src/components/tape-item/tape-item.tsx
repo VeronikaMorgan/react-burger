@@ -8,9 +8,8 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import IngredientPlate from "../orders-tape/ingredient-plate/ingredient-plate";
 import itemStyles from './tape-item.module.css';
 import { getOrderPrice } from "../../utils/helpers";
-import { setOrderSelected } from "../../services/slices/order-details-sub-slice";
 import { prepareIngredients } from "../../utils/prepare-ingredients";
-
+import { filterByQwty } from "../../utils/helpers";
 import { Iingredient } from "../../utils/types/types";
 import { TOrderData } from "../../utils/types/ws-types";
 
@@ -34,15 +33,14 @@ const TapeItem: FC<TTapeItemProps> = ({ data }) => {
         // there still be a space in template
         setPreparedData(newData)
         setPrice(getOrderPrice(newData))
+
       }
     }
   }, [allIngredients, ingredients])
 
-  const setOrder = () => {dispatch(setOrderSelected())}
-
   return (
     !!preparedData  ?
-      <Link onClick={setOrder} to={`${location.pathname}/${data._id}`} state={{background: location}} className={`${itemStyles.wrapper} p-6 link-default`}>
+      <Link to={`${location.pathname}/${data._id}`} state={{background: location}} className={`${itemStyles.wrapper} p-6 link-default`}>
         <div className={itemStyles.flex_wrapper}>
           <p className="text text_type_digits-default">#{data.number}</p>
           <FormattedDate date={new Date(data.createdAt)} className="text text_type_main-default text_color_inactive"/>

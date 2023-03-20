@@ -14,7 +14,7 @@ const FeedDetailsItem: FC<IFeedItem> = ({ data }) => {
      <IngredientPlate img={data.image_mobile} name={data.name}/>
       <h4 className="text text_type_main-default">{data.name}</h4>
       <div className={detailsStyles.price_wrapper}>
-        <p className="text text_type_digits-default">{data.type === "bun" ? 2 : 1} &#215; {data.price}</p>
+        <p className="text text_type_digits-default">{data.type === "bun" ? 2 : data.__v} &#215; {data.price}</p>
         <CurrencyIcon type="primary" />
       </div>
     </div>

@@ -27,3 +27,14 @@ export const getStatus = (status: TOrderStatus): string => {
     } 
   }
 }
+type Tobj = {
+  [name: string]: Iingredient
+}
+export const filterByQwty = (data : Iingredient[]): Iingredient[] => {
+  const result = data.reduce((acc, item) => {
+    return (typeof acc[item._id] !== 'undefined')
+    ? {...acc, [item._id]: {...acc[item._id], __v: acc[item._id].__v + 1}}
+    : {...acc, [item._id]: {...item, __v: 1}}
+  }, {} as Tobj)
+  return Object.values(result)
+}
