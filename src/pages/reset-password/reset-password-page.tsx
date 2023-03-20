@@ -9,7 +9,7 @@ import { resetPassword } from "../../services/thunks/passwordThunks";
 import LinkWrapper from "../../components/link-wrapper/link-wrapper";
 import pageStyles from '../main-styles.module.css'
 import { getCookie } from "../../utils/cookie";
-import { TResetData } from "../../utils/types";
+import { TResetData } from "../../utils/types/types";
 
 const ResetPasswordPage:FC = () => {
   const isLoggedIn = useAppSelector(store => store.user.isLoggedIn)

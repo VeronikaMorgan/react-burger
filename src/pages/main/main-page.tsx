@@ -9,7 +9,7 @@ import BurgerConstructor from '../../components/burger-constructor/burger-constr
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import Modal from '../../components/modal/modal';
 import OrderDetails from '../../components/order-details/order-details';
-import { IMain } from '../../utils/types';
+import { IMain } from '../../utils/types/types';
 
 const MainPage: FC<IMain> = ({closeModal}) => {
   const orderData = useAppSelector(store => store.order.order)
@@ -24,7 +24,7 @@ const MainPage: FC<IMain> = ({closeModal}) => {
       </DndProvider>
       {orderData?.name &&
         <Modal closeModal={closeModal}>
-          <OrderDetails orderNumber={orderData.number} />
+          <OrderDetails/>
         </Modal>
       }
     </main>
