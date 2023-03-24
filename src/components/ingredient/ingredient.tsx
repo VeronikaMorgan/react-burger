@@ -34,13 +34,13 @@ const Ingredient: FC<IngredientProps> = ({ data }) => {
   })
 
   return (
-    <Link to={`/ingredients/${data._id}`} state={{background: location}} className={`${ingredientStyles.wrapper} ${isDrag && ingredientStyles.wrapper_onDrag} link-default `} ref={dragRef}>
+    <Link data-testid='ingredient-container' to={`/ingredients/${data._id}`} state={{background: location}} className={`${ingredientStyles.wrapper} ${isDrag && ingredientStyles.wrapper_onDrag} link-default `} ref={dragRef}>
       <img src={data.image} alt={data.name} className={`${ingredientStyles.img} mr-4 ml-4`} />
       <div className={ingredientStyles.price}>
         <p className="text text_type_digits-default">{data.price}</p>
         <CurrencyIcon type="primary" />
       </div>
-      <p className="text text_type_main-default">{data.name}</p>
+      <p data-testid='name' className="text text_type_main-default">{data.name}</p>
       {counter > 0 && <Counter count={counter} size='default' />}
     </Link>
   )

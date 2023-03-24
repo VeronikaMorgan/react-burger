@@ -28,10 +28,10 @@ const Modal: FC<IModal> = ({ children, title, titleType, closeModal }) => {
   return createPortal(
     (
       <ModalOverlay closeModal={closeModal}>
-        <div className={`${modalStyles.wrapper} p-10`} onClick={e => e.stopPropagation()}>
+        <div data-testid='modal' className={`${modalStyles.wrapper} p-10`} onClick={e => e.stopPropagation()}>
           <div className={modalStyles.header}>
             <h2 className={titleStyles}>{title}</h2>
-            <button className='btn-default' onClick={closeModal}>
+            <button data-testid='modal-close-btn' className='btn-default' onClick={closeModal}>
               <CloseIcon type="primary" />
             </button>
           </div>

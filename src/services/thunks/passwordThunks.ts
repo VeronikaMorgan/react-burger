@@ -11,3 +11,15 @@ export const resetPassword = createAppAsyncThunk('password/reset', async (resetD
     const data = await baseRequest('password-reset/reset', resetPasswordOptions(resetData))
     return data
 })
+
+export const {
+    pending : sendEmailPending,
+    fulfilled : sendEmailSuccess,
+    rejected : sendEmailFailed,
+} = sendResetEmail
+
+export const {
+    pending : resetPasswordPending,
+    fulfilled : resetPasswordSuccess,
+    rejected : resetPasswordFailed,
+} = resetPassword
