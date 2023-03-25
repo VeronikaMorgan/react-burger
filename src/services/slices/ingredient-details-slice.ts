@@ -4,7 +4,7 @@ import { Iingredient } from "../../utils/types/types";
 type TIngredientDetails = {
   currentIngredient: null | Iingredient
 }
-const ingredientState: TIngredientDetails = {
+export const ingredientState: TIngredientDetails = {
   currentIngredient: null,
 }
 

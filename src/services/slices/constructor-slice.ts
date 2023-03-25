@@ -6,7 +6,7 @@ interface IConstructorState {
   hasBun: boolean
 }
 
-const constructorState: IConstructorState = {
+export const constructorState: IConstructorState = {
   constructorItems: [],
   hasBun: false,
 }
@@ -15,7 +15,7 @@ export const constructorSlice = createSlice({
   name: 'burgerConstructor',
   initialState: constructorState,
   reducers: {
-    addItem: (state, action) => { state.constructorItems.push(action.payload) },
+    addItem: (state, action: PayloadAction<Iingredient>) => { state.constructorItems.push(action.payload) },
     addBun: (state, action: PayloadAction<Iingredient>) => {
       if(state.hasBun) {
         state.constructorItems = state.constructorItems.map(item => item.type === 'bun' ? action.payload : item)
