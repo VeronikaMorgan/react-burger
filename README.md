@@ -1,7 +1,7 @@
 # React/Redux TK based pet project<br>
 ## `see the project`: https://veronikamorgan.github.io/react-burger/<br>
 #### The App represents a web-simulator of our space burger bar. You can make your own space burger, study our droll ingredients and see burgers of others in real time.<br> To make an order you should be logged in first, so sign up beforehand. If you want to show others your burgers or need to change profile data, go to profile page.<br> 
-![2023-03-25_21-58-15](https://user-images.githubusercontent.com/113067367/227736592-f6114bf9-4bb1-4a61-b9de-3dfab51073db.png | width=100)
+![2023-03-25_21-58-15](https://user-images.githubusercontent.com/113067367/227736592-f6114bf9-4bb1-4a61-b9de-3dfab51073db.png) width='100px'
 ![2023-03-25_22-00-05](https://user-images.githubusercontent.com/113067367/227736613-1b9d1f7a-411b-4197-aaaa-385aa4d28fb1.png)
 
 ### Used Stack and tools:<br>
