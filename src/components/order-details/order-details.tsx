@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import orderStyles from './order-details.module.css';
-import doneImg from '../../images/done.png';
+import doneImg from '../../images/done.png'
 import { useAppSelector } from "../../utils/hooks/app-hooks";
 
 const OrderDetails: FC = () => {

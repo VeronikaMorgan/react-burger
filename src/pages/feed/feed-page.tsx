@@ -9,7 +9,7 @@ import { publicOrdersStart, publicOrdersStop } from "../../services/slices/order
 
 const FeedPage: FC = () => {
   const dispatch = useAppDispatch()
-  
+
   useEffect(() => {
     dispatch(publicOrdersStart())
     return () => {
