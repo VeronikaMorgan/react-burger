@@ -19,8 +19,11 @@ type TOrderData = {
   number: number
 }
 
-export const orderState: TOrderState = {
-  order: null,
+const orderState: TOrderState = {
+  order: {
+    name: '',
+    number: 0
+  },
   createOrderFailed: false,
   createOrderRequest: false,
   errorMessage: ''
@@ -43,7 +46,7 @@ export const orderSlice = createSlice({
     builder.addCase(getOrder.fulfilled, (state, action: PayloadAction<TOrderData>) => ({
       ...state,
       createOrderRequest: false,
-      createOrderFailed: false,
+      createOrderFaile: false,
       order: {
         name: action.payload.name,
         number: action.payload.number
@@ -52,7 +55,7 @@ export const orderSlice = createSlice({
     builder.addCase(getOrder.rejected, (state, action) => ({
       ...state,
       createOrderRequest: false,
-      createOrderFailed: true,
+      createOrderFailed: false,
       order: null,
       errorMessage: action.payload
     }))
@@ -62,11 +65,5 @@ export const orderSlice = createSlice({
 export const {
   clearOrder
 } = orderSlice.actions
-
-export const {
-  pending,
-  fulfilled,
-  rejected,
-} = getOrder
 
 export default orderSlice.reducer

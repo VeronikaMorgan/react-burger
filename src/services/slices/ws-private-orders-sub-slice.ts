@@ -10,7 +10,7 @@ type TwsState = {
   discardedAt: number,
   errorMessage: string
 }
-export const wsState: TwsState = {
+const wsState: TwsState = {
   isWsConnected: false,
   orders: null,
   total: 0,

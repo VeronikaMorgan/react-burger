@@ -68,7 +68,7 @@ const BurgerConstructor: FC = () => {
   }, [data])
 
   return (
-    <section data-testid='constructor' className={`${constructorStyles.wrapper} ${isOver && constructorStyles.wrapper_isOver} mt-20 pl-4`} ref={dropRef}>
+    <section className={`${constructorStyles.wrapper} ${isOver && constructorStyles.wrapper_isOver} mt-20 pl-4`} ref={dropRef}>
       {data.map(item => {
         return item.type === 'bun' &&
           <div className={itemStyles.wrapper} key={item._id}>

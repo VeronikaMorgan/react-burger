@@ -10,7 +10,7 @@ type TPasswordState = {
   sendResetEmailFailed: boolean
   errorMessage:  string | undefined
 }
-export const passwordState: TPasswordState = {
+const passwordState: TPasswordState = {
   resetPasswordRequest: false,
   resetPasswordSuccess: false,
   resetPasswordFailed: false,

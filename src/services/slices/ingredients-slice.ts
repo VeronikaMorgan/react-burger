@@ -6,11 +6,13 @@ type TIngredientsState = {
   getIngredientsFailed: boolean
   getIngredientsRequest: boolean
   ingredients: Iingredient[]
+  errorMessage: string
 }
-export const initialState: TIngredientsState = {
+const initialState: TIngredientsState = {
   getIngredientsFailed: false,
   getIngredientsRequest: false,
   ingredients: [],
+  errorMessage: ''
 }
 
 export const getIngredients = createAsyncThunk('ingredients/get', async (_, thunkAPI) => {
@@ -37,11 +39,5 @@ export const ingredientsSlice = createSlice({
     }))
   }
 })
-
-export const {
-  pending,
-  fulfilled,
-  rejected
-} = getIngredients
 
 export default ingredientsSlice.reducer

@@ -16,7 +16,7 @@ type TUserState = {
   userData: TUserData,
   errorMessage: string | undefined
 }
-export const userState: TUserState = {
+const userState: TUserState = {
   request: false,
   signUpSuccess: false,
   signUpFailed: false,
@@ -46,7 +46,8 @@ const userSlice = createSlice({
   reducers: {
     resetSignUp: (state) => {state.signUpSuccess = false},
     resetLogout: (state) => {state.logoutSuccess = false},
-    resetGetUser: (state) => {state.getUserSuccess = false}
+    resetGetUser: (state) => {state.getUserSuccess = false},
+    resetPatchUser: (state) => {state.patchSuccess = false},
   },
   extraReducers: (builder) => {
     //register
@@ -90,11 +91,7 @@ const userSlice = createSlice({
       request: false,
       isLoggedIn: false,
       logoutSuccess: true,
-      errorMessage: '',
-      userData: {
-        name: '',
-        email: ''
-      }
+      errorMessage: ''
     }))
     builder.addCase(logout.rejected, (state, action: PayloadAction<string | undefined>) => ({
       ...state,
@@ -138,5 +135,5 @@ const userSlice = createSlice({
   }
 })
 
-export const {resetSignUp, resetLogout, resetGetUser} = userSlice.actions
+export const {resetSignUp, resetLogout, resetPatchUser, resetGetUser} = userSlice.actions
 export default userSlice.reducer

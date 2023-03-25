@@ -12,6 +12,7 @@ export const register = createAppAsyncThunk('auth/register', async (userData: TU
     return data
 })
 
+
 export const getUser = createAppAsyncThunk('user/get', async (_, thunkAPI) => {
     const data = await fetchWithRefresh('auth/user',getUserOptions())
     return data.user

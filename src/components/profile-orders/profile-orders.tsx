@@ -16,7 +16,7 @@ const ProfileOrders:FC = () => {
     return () => {
       dispatch(privateOrdersStop())
     }
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if(ordersData) {

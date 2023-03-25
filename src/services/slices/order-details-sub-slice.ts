@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TOrderData } from "../../utils/types/ws-types";
 
-type TorderState = {
+type TDetailsState = {
   currentOrder: TOrderData | null
 }
 
-export const orderState = <TorderState>{
+const detailsState = <TDetailsState>{
   currentOrder: null,
 }
 
 const orderDetailsSlice = createSlice({
   name: 'details',
-  initialState: orderState,
+  initialState: detailsState,
   reducers: {
     setOrderDetails: (state, action: PayloadAction<TOrderData>) => {( state.currentOrder = action.payload )},
-    clearOrderDetails: state => { state.currentOrder = null }
+    clearOrderDetails: state => {state.currentOrder = null }
   }
 })
 export const {setOrderDetails, clearOrderDetails} = orderDetailsSlice.actions

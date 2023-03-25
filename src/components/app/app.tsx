@@ -62,6 +62,7 @@ const App: FC = () => {
       dispatch(clearConstructor())
     }
   }
+  console.log(orderSelected)
 
   useEffect(() => {
     if (location.pathname.includes('/feed') && !isPublicRun) {
