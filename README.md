@@ -1,8 +1,8 @@
 # React/Redux TK based pet project<br>
-##`see the project`: https://veronikamorgan.github.io/react-burger/<br>
-###The App represents a web-simulator of our space burger bar. You can make your own space burger, study our droll ingredients and see burgers of others in real time.<br> To make an order you should be logged in first, so sign up beforehand. If you want to show others your burgers or need to change profile data, go to profile page.<br> 
+## `see the project`: https://veronikamorgan.github.io/react-burger/<br>
+### The App represents a web-simulator of our space burger bar. You can make your own space burger, study our droll ingredients and see burgers of others in real time.<br> To make an order you should be logged in first, so sign up beforehand. If you want to show others your burgers or need to change profile data, go to profile page.<br> 
 
-####Used Stack and tools:<br>
+#### Used Stack and tools:<br>
 *React.js, ReactRouter, React DnD<br>
 *Redux Toolkit as a state manager<br>
 *Websockets for two-way communication session used to create orders tapes<br>
@@ -13,7 +13,7 @@
 *Jest for unit testing<br>
 *Cypress.io for e2e testing<br>
 
-####Available Scripts<br>
+#### Available Scripts<br>
 to perform the following steps you should have pre-installed Node.js/npm/Git<br>
 
 to clone the project run: <br>
