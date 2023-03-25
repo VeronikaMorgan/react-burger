@@ -13,7 +13,7 @@
 * Jest for unit testing<br>
 * Cypress.io for e2e testing<br>
 
-### Available Scripts<br>
+### Available Scripts:<br>
 to perform the following steps you should have pre-installed Node.js/npm/Git<br>
 
 to clone the project run: <br>
