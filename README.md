@@ -3,7 +3,7 @@ see the project: https://veronikamorgan.github.io/react-burger/
 The App represents a web-simulator of our space burger bar. You can make your own space burger, study our droll ingredients and see burgers of others in real time. To make an order you should be logged in first, so sign up beforehand. If you want to show others your burgers or need to change profile data, go to profile page. 
 
 Used Stack and tools:
-React.js, ReactRouter, React DnD
+React.js, ReactRouter, React DnD<br>
 Redux Toolkit as a state manager
 Websockets for two-way communication session used to create orders tapes
 
