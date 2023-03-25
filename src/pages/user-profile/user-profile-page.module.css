@@ -23,10 +23,12 @@
 }
 
 .nav__link {
+  text-decoration: none;
   display: flex;
   align-items: center;
   min-height: 64px;
-  cursor: pointer
+  cursor: pointer;
+  color:#8585ad
 }
 
 .nav__link_active {

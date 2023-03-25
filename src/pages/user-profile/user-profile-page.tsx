@@ -12,7 +12,8 @@ const ProfilePage: FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const linkStyle: string = `${profileStyles.nav__link} link-default text text_type_main-medium isActive`
+  const activeLink: string = `${profileStyles.nav__link} text text_type_main-medium ${profileStyles.nav__link_active}`
+  const inactiveLink: string = `${profileStyles.nav__link}  text text_type_main-medium text_color_inactive`
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -32,10 +33,10 @@ const ProfilePage: FC = () => {
           <nav className='pb-20'>
             <ul className={`${profileStyles.nav} list-default`}>
               <li>
-                <NavLink to='' className={({ isActive }) => `${linkStyle} ${!isActive && 'text_color_inactive'}`} >Профиль</NavLink>
+                <NavLink end to='' className={({ isActive }) => (isActive ? `${activeLink}` : `${inactiveLink}`)}>Профиль</NavLink>
               </li>
               <li>
-                <NavLink to='orders' className={({ isActive }) => `${linkStyle} ${!isActive && 'text_color_inactive'}`} >История заказов</NavLink>
+                <NavLink to='/profile/orders' className={({ isActive }) => (isActive ? `${activeLink}` : `${inactiveLink}`)} >История заказов</NavLink>
               </li>
               <li>
                 <button className={`${profileStyles.nav__link} text text_type_main-medium text_color_inactive btn-default`} onClick={handleLogout}>Выход</button>
