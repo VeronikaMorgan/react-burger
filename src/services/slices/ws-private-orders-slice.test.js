@@ -1,4 +1,4 @@
-import { mockOrdersData } from "../utils/moks";
+import { mockOrdersData } from "../__tests__/moks";
 import {
   privateOrdersReducer,
   wsState,
@@ -8,7 +8,7 @@ import {
   closePrivateOrders,
   privateOrdersOnError,
   privateOrdersOnMessage
-} from "../services/slices/ws-private-orders-sub-slice";
+} from "./ws-private-orders-sub-slice";
 
 
 describe('tests for private orders slice', () => {

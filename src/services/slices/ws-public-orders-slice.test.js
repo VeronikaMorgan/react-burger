@@ -7,9 +7,9 @@ import {
   closePublicOrders,
   publicOrdersOnError,
   publicOrdersOnMessage
-} from "../services/slices/ws-public-orders-sub-slice";
+} from "./ws-public-orders-sub-slice";
 
-import { mockOrdersData } from "../utils/moks";
+import { mockOrdersData } from "../__tests__/moks";
 
 
 describe('tests for public orders slice', () => {

@@ -21,7 +21,7 @@ describe('ingredient modal', function() {
   })
   context('close modal', function() {
     this.afterEach(() => {
-      cy.url().should('eq', 'http://localhost:3001/')
+      cy.url().should('eq', 'http://localhost:3000/#/')
       cy.get('@modal').should('not.exist')
     })
     it('should close the modal on close btn', function() {

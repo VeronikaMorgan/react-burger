@@ -1,5 +1,5 @@
-import orderReducer from "../services/slices/order-slice";
-import { clearOrder, pending, fulfilled, rejected, orderState } from "../services/slices/order-slice";
+import orderReducer from "./order-slice";
+import { clearOrder, pending, fulfilled, rejected, orderState } from "./order-slice";
 
 describe('tests for order slice', () => {
   it('should return the initial state', () => {

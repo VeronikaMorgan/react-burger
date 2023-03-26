@@ -1,6 +1,6 @@
-import ingredientsReducer from '../services/slices/ingredients-slice';
-import { mockIngredients } from '../utils/moks';
-import { initialState, pending, fulfilled, rejected } from '../services/slices/ingredients-slice';
+import ingredientsReducer from './ingredients-slice';
+import { mockIngredients } from '../__tests__/moks';
+import { initialState, pending, fulfilled, rejected } from './ingredients-slice';
 
 describe('tests for ingredientsSlice', () => {
   it('should return the initial state', () => {

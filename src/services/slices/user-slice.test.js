@@ -1,13 +1,13 @@
-import userReducer from "../services/slices/user-slice";
+import userReducer from "./user-slice";
 import {
   userState,
   resetSignUp,
   resetLogout,
   resetGetUser
-} from "../services/slices/user-slice";
-import { mockUser } from "../utils/moks";
+} from "./user-slice";
+import { mockUser } from "../__tests__/moks";
 
-import { register, login, logout, getUser, patchUser } from "../services/thunks/userThunks";
+import { register, login, logout, getUser, patchUser } from "../thunks/userThunks";
 
 describe('tests for user slice', () => {
   it('should return the initial state', () => {

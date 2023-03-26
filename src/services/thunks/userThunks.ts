@@ -1,7 +1,6 @@
 import { createAppAsyncThunk } from "../../utils/hooks/app-hooks";
 import { getCookie } from "../../utils/cookie";
 import { fetchWithRefresh,baseRequest, getUserOptions, loginOptions, logoutOptions, registerOptions, patchUserOptions } from "../../utils/api";
-import { refreshToken } from "../slices/refresh-token-slice";
 import { setCookie, deleteCookie } from "../../utils/cookie";
 import { EXPIRY_MESSAGE } from "../../utils/constants";
 import { TUserData, TPatchUserData, TUserSignUpData } from "../../utils/types/types";

@@ -1,6 +1,6 @@
-import constructorReducer from '../services/slices/constructor-slice';
-import { mockIngredient, mockBun } from '../utils/moks';
-import { addItem, addBun, deleteItem, updateConstructor, clearConstructor, constructorState } from '../services/slices/constructor-slice';
+import constructorReducer from './constructor-slice';
+import { mockIngredient, mockBun } from '../__tests__/moks';
+import { addItem, addBun, deleteItem, updateConstructor, clearConstructor, constructorState } from './constructor-slice';
 
 describe('tests for constructor slice', () => {
   it('should return the initial state', () => {
