@@ -8,7 +8,7 @@
 ### Used Stack and tools:<br>
 * React.js, ReactRouter, React DnD<br>
 * Redux Toolkit as a state manager<br>
-* Websockets for two-way communication session used to create orders tapes<br>
+* Websockets for two-way communication session used to create order tapes<br>
 
 * Typescript as main language<br>
 * Css modules, grid/flex for template<br>
