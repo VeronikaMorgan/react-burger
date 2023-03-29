@@ -1,6 +1,6 @@
-import ingredientReducer from '../services/slices/ingredient-details-slice';
-import { mockIngredient } from '../utils/moks';
-import { setIngredient, clearIngredient, ingredientState } from '../services/slices/ingredient-details-slice'
+import ingredientReducer from './ingredient-details-slice';
+import { mockIngredient } from '../__tests__/moks';
+import { setIngredient, clearIngredient, ingredientState } from './ingredient-details-slice'
 
 describe('tests for ingredient slice', () => {
   it('should return the initial state', () => {

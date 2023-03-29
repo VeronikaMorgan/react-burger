@@ -42,7 +42,6 @@ const LogInPage: FC = () => {
     e.preventDefault()
     dispatch(login(values))
   }
-  console.log(isLoggedIn)
   useEffect(() => {
     if(isLoggedIn || getCookie("access")) {
       navigate(location.state?.from ? location.state?.from : '/', {replace: true})

@@ -1,5 +1,5 @@
-import passwordReducer from '../services/slices/password-slice';
-import { clearPasswordState, passwordState } from '../services/slices/password-slice';
+import passwordReducer from './password-slice';
+import { clearPasswordState, passwordState } from './password-slice';
 import {
   resetPasswordPending,
   resetPasswordSuccess,
@@ -7,7 +7,7 @@ import {
   sendEmailPending,
   sendEmailSuccess,
   sendEmailFailed
-} from '../services/thunks/passwordThunks';
+} from '../thunks/passwordThunks';
 
 describe('tests for reset password slice', () => {
   it('should return the initial state', () => {

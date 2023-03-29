@@ -1,5 +1,5 @@
-import { mockChosenOrder } from '../utils/moks';
-import { setOrderDetails, clearOrderDetails, orderState, orderDetailsReducer } from '../services/slices/order-details-sub-slice';
+import { setOrderDetails, clearOrderDetails, orderState, orderDetailsReducer } from './order-details-sub-slice';
+import { mockChosenOrder } from '../__tests__/moks';
 
 describe('tests for order details slice', () => {
   it('should return the initial state', () => {

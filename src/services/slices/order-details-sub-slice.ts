@@ -18,4 +18,4 @@ const orderDetailsSlice = createSlice({
   }
 })
 export const {setOrderDetails, clearOrderDetails} = orderDetailsSlice.actions
-export const orderDetailsReducer =  orderDetailsSlice.reducer
+export const orderDetailsReducer = orderDetailsSlice.reducer
